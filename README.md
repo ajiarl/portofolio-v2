@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aji Arlando — Fullstack Developer Portfolio 🚀
 
-## Getting Started
+A modern, systematic web portfolio built from the ground up, highlighting technical precision and robust architecture.
 
-First, run the development server:
+🔗 **Live Demo:** [ajiarlando.my.id](https://ajiarlando.my.id)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+![Banner](./screenshot.png)
+
+## 📖 About the Project
+
+This repository contains the source code for my personal portfolio. It is a complete architectural rebuild designed to reflect my approach to software engineering. The UI follows a strict **"Structural Honesty"** design philosophy:
+- **Sharp Edges:** `0px` border-radius across all components.
+- **Exposed Grid:** Backgrounds mimicking architectural blueprint grid lines.
+- **No Artificial Depth:** Stripped away drop shadows in favor of flat, high-contrast, hairline borders.
+- **Visual Transparency:** Emphasizing raw structure over ornamental flair.
+
+## 🛠️ Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS v4
+- **Backend & Auth:** Supabase (PostgreSQL + Authentication + Storage)
+- **Deployment:** Vercel
+
+## ✨ Features
+
+- **Public Facing Pages:** Home, Selected Work, About, and Contact.
+- **Admin Dashboard:** A fully protected internal CMS for executing CRUD operations on portfolio projects.
+- **Auth Guard:** Supabase Authentication securing all `/dashboard` and `/login` routes.
+- **SEO & Performance:** Dynamic metadata injection, auto-generated `sitemap.xml` & `robots.txt`, and skeleton loading states.
+- **Monitoring:** Real-time tracking via Vercel Analytics and Speed Insights.
+
+## 📂 Project Structure
+
+```text
+src/
+├── app/                  # Next.js App Router (Public routes & protected /dashboard)
+├── components/           
+│   ├── layout/           # Shared page wrappers (Navbar, Footer, Grid Background)
+│   └── ui/               # Reusable primitive components (Button, Input, TechTag)
+├── lib/                  
+│   ├── supabase/         # Supabase SSR and Client initializers
+│   ├── constants.ts      # Global site configuration & static data
+│   └── utils.ts          # Helper utilities (class merging, slugification)
+└── ...
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Running Locally
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To run this project on your local machine:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/ajiarl/portofolio-v2.git
+   cd portofolio-v2
+   ```
 
-## Learn More
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+3. **Set up Environment Variables:**
+   Create a `.env.local` file in the root directory and define the following variables. *(You will need to supply your own Supabase project credentials).*
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   NEXT_PUBLIC_SITE_URL=http://localhost:3000
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📫 Contact
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Want to collaborate, discuss technical implementations, or just say hi? 
+- Reach out via the [Contact Page](https://ajiarlando.my.id/contact)
+- Email: [ajiarlando127@gmail.com](mailto:ajiarlando127@gmail.com)

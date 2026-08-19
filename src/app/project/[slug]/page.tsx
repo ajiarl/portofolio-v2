@@ -41,7 +41,7 @@ export default async function ProjectDetailPage({ params }: Props) {
   }
 
   return (
-    <main className="flex-grow w-full max-w-7xl mx-auto px-6 md:px-10 py-12 md:py-16 flex flex-col gap-12 relative z-10">
+    <main className="flex-grow w-full max-w-7xl mx-auto px-5 md:px-8 lg:px-10 py-12 md:py-16 flex flex-col gap-12 relative z-10">
       
       {/* Header */}
       <section className="flex flex-col gap-6">

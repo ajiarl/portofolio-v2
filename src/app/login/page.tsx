@@ -65,7 +65,7 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="flex-grow w-full max-w-7xl mx-auto px-6 md:px-10 flex flex-col items-center justify-center min-h-[70vh] relative z-10">
+    <main className="flex-grow w-full max-w-7xl mx-auto px-5 md:px-8 lg:px-10 flex flex-col items-center justify-center min-h-[70vh] relative z-10">
       <div className="w-full max-w-md border border-border bg-surface p-8">
         <header className="mb-8 border-b border-border pb-4">
           <h1 className="font-heading text-4xl font-extrabold text-primary mb-2">

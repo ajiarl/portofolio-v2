@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="flex-grow flex flex-col justify-center md:justify-start relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 py-12 md:py-0 md:pt-32 md:pb-12">
+    <main className="flex-grow flex flex-col justify-center md:justify-start relative z-10 w-full max-w-7xl mx-auto px-5 md:px-8 lg:px-10 py-12 md:py-0 md:pt-32 md:pb-12">
       <div className="flex flex-col items-start gap-8 max-w-3xl">
         <TechTag>FULLSTACK DEVELOPER</TechTag>
         <div className="relative">

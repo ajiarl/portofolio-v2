@@ -23,7 +23,7 @@ export function Navbar() {
 
   return (
     <nav className="w-full top-0 sticky bg-background border-b border-border z-50">
-      <div className="flex justify-between items-center w-full px-6 md:px-10 py-4 max-w-7xl mx-auto">
+      <div className="flex justify-between items-center w-full px-5 md:px-8 lg:px-10 py-4 max-w-7xl mx-auto">
         <Link href="/" className="font-heading text-xl md:text-2xl font-bold tracking-tighter text-primary">
           AJI ARLANDO
         </Link>

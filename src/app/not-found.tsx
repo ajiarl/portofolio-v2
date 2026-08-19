@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/Button'
 
 export default function NotFound() {
   return (
-    <main className="flex-grow w-full max-w-7xl mx-auto px-6 md:px-10 flex flex-col items-center justify-center min-h-[60vh] relative z-10 text-center gap-6">
+    <main className="flex-grow w-full max-w-7xl mx-auto px-5 md:px-8 lg:px-10 flex flex-col items-center justify-center min-h-[60vh] relative z-10 text-center gap-6">
       <div className="font-heading text-8xl font-extrabold text-primary">404</div>
       <h1 className="font-mono text-xl font-bold uppercase tracking-widest text-primary border-y border-border py-4 w-full max-w-md">
         SYSTEM FAULT: PAGE NOT FOUND

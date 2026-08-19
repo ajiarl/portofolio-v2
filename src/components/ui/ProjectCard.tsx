@@ -1,7 +1,10 @@
+"use client";
+
 import Link from 'next/link'
 import Image from 'next/image'
 import { TechTag } from './TechTag'
 import { toSlug } from '@/lib/utils'
+import { motion, useReducedMotion } from 'framer-motion'
 
 export interface ProjectData {
   id: string;
@@ -19,12 +22,19 @@ interface ProjectCardProps {
 export function ProjectCard({ project, index }: ProjectCardProps) {
   const formattedNumber = (index + 1).toString().padStart(2, '0')
   const slug = toSlug(project.Title)
+  const shouldReduceMotion = useReducedMotion()
 
   return (
-    <Link 
-      href={`/project/${slug}`}
-      className="border border-border bg-surface hover:border-primary transition-all duration-200 ease-in-out flex flex-col group block h-full cursor-pointer"
+    <motion.div
+      initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.2, delay: index * 0.05, ease: "easeOut" }}
+      className="h-full"
     >
+      <Link 
+        href={`/project/${slug}`}
+        className="border border-border bg-surface hover:border-primary transition-all duration-200 ease-in-out flex flex-col group block h-full cursor-pointer"
+      >
       <div className="h-48 border-b border-border bg-[#ebe7e6] relative overflow-hidden group-hover:bg-[#c8c6c5] transition-all duration-200 ease-in-out">
         {project.Img ? (
           <Image 
@@ -54,5 +64,6 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         </footer>
       </div>
     </Link>
+    </motion.div>
   )
 }

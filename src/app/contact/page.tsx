@@ -15,7 +15,7 @@ export default function ContactPage() {
   const nextUrl = `${siteUrl}/contact?success=true`
 
   return (
-    <main className="flex-grow w-full max-w-7xl mx-auto px-6 md:px-10 py-12 md:py-16 flex flex-col gap-12 relative z-10">
+    <main className="flex-grow w-full max-w-7xl mx-auto px-5 md:px-8 lg:px-10 py-12 md:py-16 flex flex-col gap-12 relative z-10">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
         
         {/* Left Column */}

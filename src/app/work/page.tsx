@@ -48,6 +48,11 @@ export default async function WorkPage() {
     .select('id, Title, Description, Img, TechStack')
     .order('created_at', { ascending: false })
 
+  if (error) {
+    console.error("Supabase Fetch Error:", error);
+  }
+
+
   const displayProjects = projects && projects.length > 0 ? projects : DUMMY_PROJECTS;
 
   return (

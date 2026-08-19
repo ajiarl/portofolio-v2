@@ -37,7 +37,7 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "font-mono text-[12px] font-bold uppercase tracking-[0.05em] px-2 py-1 transition-none duration-0 border-b",
+                  "font-mono text-[12px] font-bold uppercase tracking-[0.05em] px-2 py-1 transition-all duration-200 ease-in-out border-b",
                   isActive 
                     ? "text-primary border-primary"
                     : "text-muted border-transparent hover:bg-primary hover:text-white hover:border-primary"
@@ -51,7 +51,7 @@ export function Navbar() {
 
         {/* Mobile Nav Toggle */}
         <button 
-          className="md:hidden p-1 text-primary border border-transparent hover:border-border transition-none focus:outline-none focus:border-border"
+          className="md:hidden p-1 text-primary border border-transparent hover:border-border transition-all duration-200 ease-in-out focus:outline-none focus:border-border"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle Menu"
         >
@@ -69,7 +69,7 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "font-mono text-[14px] font-bold uppercase tracking-[0.05em] px-4 py-3 transition-none duration-0 border",
+                  "font-mono text-[14px] font-bold uppercase tracking-[0.05em] px-4 py-3 transition-all duration-200 ease-in-out border",
                   isActive 
                     ? "text-primary border-primary bg-surface"
                     : "text-muted border-border hover:bg-primary hover:text-white hover:border-primary"

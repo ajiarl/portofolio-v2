@@ -22,14 +22,14 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
   return (
     <Link 
       href={`/project/${slug}`}
-      className="border border-border bg-surface hover:border-primary transition-none flex flex-col group block h-full cursor-pointer"
+      className="border border-border bg-surface hover:border-primary transition-all duration-200 ease-in-out flex flex-col group block h-full cursor-pointer"
     >
-      <div className="h-48 border-b border-border bg-[#ebe7e6] relative overflow-hidden group-hover:bg-[#c8c6c5] transition-none">
+      <div className="h-48 border-b border-border bg-[#ebe7e6] relative overflow-hidden group-hover:bg-[#c8c6c5] transition-all duration-200 ease-in-out">
         {project.Img ? (
           <img 
             src={project.Img} 
             alt={project.Title} 
-            className="w-full h-full object-cover group-hover:opacity-90 transition-none"
+            className="w-full h-full object-cover group-hover:opacity-90 transition-all duration-200 ease-in-out"
           />
         ) : (
           <div className="w-full h-full bg-border flex items-center justify-center font-mono text-muted text-xs">

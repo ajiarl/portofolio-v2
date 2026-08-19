@@ -12,7 +12,7 @@ export function Textarea({ label, className, ...props }: TextareaProps) {
       </label>
       <textarea
         className={cn(
-          "bg-transparent border border-outline px-4 py-2 font-mono text-[16px] text-primary outline-none focus:border-accent focus:ring-0 resize-none",
+          "bg-transparent border border-outline px-4 py-2 font-mono text-[16px] text-primary outline-none focus:border-accent focus:ring-0 resize-none transition-all duration-200 ease-in-out",
           className
         )}
         {...props}

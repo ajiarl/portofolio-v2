@@ -1,6 +1,12 @@
 import { Button } from "@/components/ui/Button"
 import Link from "next/link"
 import { TechTag } from "@/components/ui/TechTag"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Aji Arlando | Fullstack Developer",
+  description: "Building robust, systematic solutions from the ground up, with a focus on Information Systems and technical precision.",
+}
 
 export default function Home() {
   return (

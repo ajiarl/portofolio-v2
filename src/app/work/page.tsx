@@ -1,5 +1,11 @@
 import { createClient } from '@/lib/supabase/server'
 import { ProjectCard, type ProjectData } from '@/components/ui/ProjectCard'
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Selected Work | Aji Arlando",
+  description: "A collection of robust, systematic solutions and web applications built with technical precision.",
+}
 
 export const revalidate = 0 // Opt out of caching for now
 

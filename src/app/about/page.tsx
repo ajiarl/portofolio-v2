@@ -1,6 +1,12 @@
 import Image from "next/image"
 import { TECH_STACK } from "@/lib/constants"
 import { TechTag } from "@/components/ui/TechTag"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "About | Aji Arlando",
+  description: "A glimpse into the workflow, technical capabilities, and background of Aji Arlando, a systematic builder and fullstack developer.",
+}
 
 export default function AboutPage() {
   return (

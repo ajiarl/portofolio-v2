@@ -3,6 +3,12 @@ import { FiGithub, FiLinkedin, FiInstagram } from "react-icons/fi"
 import { Input } from "@/components/ui/Input"
 import { Textarea } from "@/components/ui/Textarea"
 import { Button } from "@/components/ui/Button"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Contact | Aji Arlando",
+  description: "Get in touch with Aji Arlando for collaborations, technical inquiries, or to discuss your next project.",
+}
 
 export default function ContactPage() {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000')

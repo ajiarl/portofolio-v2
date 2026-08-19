@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="flex-grow flex flex-col justify-start relative z-10 w-full max-w-7xl mx-auto px-5 md:px-8 lg:px-10 pt-16 pb-12 md:pt-24 md:pb-12">
-      <div className="flex-1 flex flex-col items-start w-full max-w-3xl">
+    <main className="flex flex-col justify-start relative z-10 w-full max-w-7xl mx-auto px-5 md:px-8 lg:px-10 pt-16 pb-12 md:pt-24 md:pb-12">
+      <div className="flex flex-col items-start w-full max-w-3xl">
         <div className="flex flex-col items-start gap-8">
           <TechTag>FULLSTACK DEVELOPER</TechTag>
           <div className="relative">
@@ -26,16 +26,16 @@ export default function Home() {
           </p>
           <div className="flex flex-wrap gap-4 pt-4">
             <Link href="/work">
-              <Button variant="outline" className="border-primary border-2">VIEW WORK</Button>
+              <Button variant="outline" className="border-primary border-2 h-12">VIEW WORK</Button>
             </Link>
             <Link href="/contact">
-              <Button variant="ghost" className="border border-border">CONTACT</Button>
+              <Button variant="ghost" className="border-border border-2 h-12">CONTACT</Button>
             </Link>
           </div>
         </div>
 
-        {/* Socials Row - Pushed to bottom on mobile, normal spacing on desktop */}
-        <div className="mt-auto md:mt-12 pt-16 md:pt-0 flex items-center gap-6 w-full">
+        {/* Socials Row */}
+        <div className="mt-12 flex items-center gap-6 w-full">
            <span className="font-mono text-[10px] font-medium text-outline uppercase tracking-widest">SOCIALS</span>
            <div className="flex gap-5">
               <a href="https://github.com/ajiarl" target="_blank" rel="noopener noreferrer" className="text-outline hover:text-primary transition-colors duration-200" aria-label="GitHub">

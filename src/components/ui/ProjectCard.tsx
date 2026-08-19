@@ -1,0 +1,56 @@
+import Link from 'next/link'
+import { TechTag } from './TechTag'
+import { toSlug } from '@/lib/utils'
+
+export interface ProjectData {
+  id: string;
+  Title: string;
+  Description: string;
+  Img: string;
+  TechStack: string[];
+}
+
+interface ProjectCardProps {
+  project: ProjectData;
+  index: number;
+}
+
+export function ProjectCard({ project, index }: ProjectCardProps) {
+  const formattedNumber = (index + 1).toString().padStart(2, '0')
+  const slug = toSlug(project.Title)
+
+  return (
+    <Link 
+      href={`/project/${slug}`}
+      className="border border-border bg-surface hover:border-primary transition-none flex flex-col group block h-full cursor-pointer"
+    >
+      <div className="h-48 border-b border-border bg-[#ebe7e6] relative overflow-hidden group-hover:bg-[#c8c6c5] transition-none">
+        {project.Img ? (
+          <img 
+            src={project.Img} 
+            alt={project.Title} 
+            className="w-full h-full object-cover group-hover:opacity-90 transition-none"
+          />
+        ) : (
+          <div className="w-full h-full bg-border flex items-center justify-center font-mono text-muted text-xs">
+            NO IMAGE
+          </div>
+        )}
+      </div>
+      <div className="p-4 flex flex-col gap-2 flex-grow">
+        <header className="flex justify-between items-start border-b border-border pb-2 mb-2">
+          <h2 className="font-heading text-xl font-bold text-primary">{project.Title}</h2>
+          <span className="font-mono text-[10px] font-medium text-outline">{formattedNumber}</span>
+        </header>
+        <p className="font-mono text-sm text-muted flex-grow leading-relaxed">
+          {project.Description}
+        </p>
+        <footer className="flex flex-wrap gap-2 mt-4 pt-2 border-t border-border">
+          {project.TechStack && project.TechStack.map((tech, i) => (
+            <TechTag key={i}>{tech}</TechTag>
+          ))}
+        </footer>
+      </div>
+    </Link>
+  )
+}

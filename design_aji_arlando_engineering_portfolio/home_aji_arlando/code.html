@@ -1,0 +1,200 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Aji Arlando - Fullstack Developer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&amp;family=JetBrains+Mono:wght@400..800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e5e2e1",
+                        "secondary": "#5a632e",
+                        "on-surface": "#1c1b1b",
+                        "outline": "#747878",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e5e2e1",
+                        "surface-container-low": "#f7f3f2",
+                        "on-secondary-fixed": "#191e00",
+                        "inverse-surface": "#313030",
+                        "on-primary-fixed-variant": "#474746",
+                        "on-primary-fixed": "#1c1b1b",
+                        "tertiary-container": "#1b1c18",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "surface-tint": "#5f5e5e",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#fdf8f8",
+                        "secondary-container": "#dce5a3",
+                        "on-secondary-fixed-variant": "#434b18",
+                        "primary-container": "#1c1b1b",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#000000",
+                        "on-tertiary-fixed-variant": "#464743",
+                        "surface-container-high": "#ebe7e6",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed": "#1b1c18",
+                        "on-surface-variant": "#444748",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#000000",
+                        "outline-variant": "#c4c7c7",
+                        "primary-fixed": "#e5e2e1",
+                        "on-tertiary-container": "#84847f",
+                        "on-secondary-container": "#5f6732",
+                        "secondary-fixed": "#dfe8a6",
+                        "surface-dim": "#ddd9d8",
+                        "background": "#fdf8f8",
+                        "surface": "#fdf8f8",
+                        "on-background": "#1c1b1b",
+                        "tertiary-fixed-dim": "#c7c7c1",
+                        "secondary-fixed-dim": "#c3cc8c",
+                        "on-primary-container": "#858383",
+                        "inverse-primary": "#c8c6c5",
+                        "error-container": "#ffdad6",
+                        "inverse-on-surface": "#f4f0ef",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#e4e3dd",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#f1edec",
+                        
+                        // Custom Palette Mapping based on Style Guidance
+                        "laboratory-bone": "#F5F4EF",
+                        "deep-ink": "#1c1b1b", // Using on-surface
+                        "circuit-board-olive": "#5a632e", // Using secondary
+                        "soft-grey": "#E5E4DE", // Structural hairline color
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "stack-sm": "8px",
+                        "stack-md": "24px",
+                        "gutter": "1px",
+                        "stack-lg": "48px",
+                        "grid-column": "repeat(12, 1fr)",
+                        "margin-page": "40px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["JetBrains Mono"],
+                        "metadata": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Bricolage Grotesque"],
+                        "headline-lg": ["Bricolage Grotesque"],
+                        "body-sm": ["JetBrains Mono"],
+                        "display-lg": ["Bricolage Grotesque"],
+                        "label-caps": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "metadata": ["10px", { "lineHeight": "1", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700" }]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-laboratory-bone text-deep-ink font-body-lg min-h-screen flex flex-col relative overflow-hidden">
+<!-- Background Grid Lines (Visible Infrastructure) -->
+<div class="absolute inset-0 pointer-events-none grid grid-cols-4 md:grid-cols-12 gap-0 border-x border-soft-grey w-full max-w-[1440px] mx-auto px-4 md:px-margin-page">
+<div class="border-r border-soft-grey h-full hidden md:block"></div>
+<div class="border-r border-soft-grey h-full hidden md:block"></div>
+<div class="border-r border-soft-grey h-full hidden md:block"></div>
+<div class="border-r border-soft-grey h-full hidden md:block"></div>
+<div class="border-r border-soft-grey h-full hidden md:block"></div>
+<div class="border-r border-soft-grey h-full hidden md:block"></div>
+<div class="border-r border-soft-grey h-full hidden md:block"></div>
+<div class="border-r border-soft-grey h-full hidden md:block"></div>
+<div class="border-r border-soft-grey h-full hidden md:block"></div>
+<div class="border-r border-soft-grey h-full hidden md:block"></div>
+<div class="border-r border-soft-grey h-full hidden md:block"></div>
+<div class="h-full"></div>
+</div>
+<!-- Horizontal Grid Lines -->
+<div class="absolute top-1/4 w-full border-b border-soft-grey pointer-events-none"></div>
+<div class="absolute top-3/4 w-full border-b border-soft-grey pointer-events-none"></div>
+<!-- TopNavBar Component -->
+<nav class="relative z-10 docked full-width top-0 bg-background border-b border-soft-grey flex justify-between items-center w-full px-4 md:px-margin-page py-stack-sm max-w-[1440px] mx-auto">
+<div class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold text-on-surface tracking-tighter">
+            AJI ARLANDO
+        </div>
+<div class="hidden md:flex gap-8">
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Home</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-0" href="#">Work</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-0" href="#">About</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-0" href="#">Contact</a>
+</div>
+<div class="font-metadata text-metadata text-outline hidden sm:block"><br></div>
+</nav>
+<!-- Main Content Area (Hero) -->
+<main class="flex-grow flex flex-col justify-center relative z-10 w-full max-w-[1440px] mx-auto px-4 md:px-margin-page">
+<div class="grid grid-cols-4 md:grid-cols-12 gap-0 relative">
+<!-- Metadata Headers (Top Left) -->
+<div class="col-span-4 md:col-span-12 mb-8 flex justify-between items-end border-b border-soft-grey pb-2">
+
+
+</div>
+<!-- Hero Text -->
+<div class="col-span-4 md:col-start-2 md:col-span-9 lg:col-start-3 lg:col-span-8 flex flex-col gap-6 pt-12 pb-24 relative">
+<!-- Crosshair Accents -->
+<div class="absolute top-0 left-0 w-2 h-px bg-circuit-board-olive"></div>
+<div class="absolute top-0 left-0 w-px h-2 bg-circuit-board-olive"></div>
+<h2 class="font-label-caps text-label-caps text-circuit-board-olive tracking-widest uppercase">
+                    Fullstack Developer
+                </h2>
+<h1 class="font-display-lg text-display-lg text-deep-ink break-words hyphens-auto border-l-2 border-deep-ink pl-4 md:pl-8 ml-[-18px] md:ml-[-34px]">
+                    Aji Arlando
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mt-4 border-t border-soft-grey pt-6">
+                    Building robust, systematic solutions from the ground up, with a focus on Information Systems and technical precision.
+                </p>
+<div class="flex flex-wrap gap-4 mt-8 pt-6 border-t border-soft-grey">
+<button class="font-label-caps text-label-caps px-6 py-3 border border-deep-ink bg-transparent text-deep-ink hover:bg-deep-ink hover:text-laboratory-bone transition-none uppercase">
+                        View Work
+                    </button>
+<button class="font-label-caps text-label-caps px-6 py-3 border border-soft-grey bg-transparent text-on-surface-variant hover:border-deep-ink hover:text-deep-ink transition-none uppercase">
+                        Contact
+                    </button>
+</div>
+<!-- Crosshair Accents Bottom Right -->
+<div class="absolute bottom-0 right-0 w-2 h-px bg-soft-grey"></div>
+<div class="absolute bottom-0 right-0 w-px h-2 bg-soft-grey"></div>
+</div>
+</div>
+</main>
+<!-- Footer Component -->
+<footer class="relative z-10 docked full-width bottom-0 bg-background border-t border-soft-grey flex flex-col md:flex-row justify-between items-center w-full px-4 md:px-margin-page py-stack-md max-w-[1440px] mx-auto">
+<div class="font-label-caps text-label-caps text-on-surface mb-4 md:mb-0"><span style="color: rgb(0, 0, 0); letter-spacing: 0.6px;">© 2024 AJI ARLANDO. ALL RIGHTS RESERVED.</span></div>
+<div class="flex gap-4 font-body-sm text-body-sm">
+<a class="text-on-surface-variant hover:bg-on-surface hover:text-surface px-2 py-1 border border-transparent hover:border-soft-grey transition-none" href="#">GitHub</a>
+<a class="text-on-surface-variant hover:bg-on-surface hover:text-surface px-2 py-1 border border-transparent hover:border-soft-grey transition-none" href="#">LinkedIn</a>
+</div>
+</footer>
+</body></html>

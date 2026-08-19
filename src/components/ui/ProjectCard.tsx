@@ -67,9 +67,12 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         {/* Footer Area with Tags and Links */}
         <footer className="mt-auto pt-2 border-t border-border flex flex-col gap-4 pointer-events-auto">
           <div className="flex flex-wrap gap-2">
-            {project.TechStack && project.TechStack.map((tech, i) => (
+            {project.TechStack && project.TechStack.slice(0, 6).map((tech, i) => (
               <TechTag key={i}>{tech}</TechTag>
             ))}
+            {project.TechStack && project.TechStack.length > 6 && (
+              <TechTag key="more">+{project.TechStack.length - 6}</TechTag>
+            )}
           </div>
           
           {/* External Links */}

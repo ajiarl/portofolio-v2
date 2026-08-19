@@ -266,8 +266,11 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
                       PROJECT IMAGE {mode === 'create' ? '*' : '(Upload new to change)'}
                     </label>
                     <div 
-                      className="border border-border p-4 flex flex-col items-center justify-center gap-4 cursor-pointer hover:border-primary transition-none min-h-[160px] relative overflow-hidden"
+                      className="border border-border p-4 flex flex-col items-center justify-center gap-4 cursor-pointer hover:border-primary transition-all duration-200 ease-in-out min-h-[160px] relative overflow-hidden"
                       onClick={() => fileInputRef.current?.click()}
+                      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInputRef.current?.click(); } }}
+                      role="button"
+                      tabIndex={0}
                     >
                       {imagePreview ? (
                         <img src={imagePreview} alt="Preview" className="w-full h-full absolute inset-0 object-cover grayscale" />
@@ -308,7 +311,7 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
                     <div className="flex flex-wrap gap-2">
                       {techStack.map((tech, i) => (
                         <TechTag key={i}>
-                          {tech} <span className="ml-2 cursor-pointer hover:text-primary font-bold" onClick={() => handleRemoveTech(i)}>×</span>
+                          {tech} <button type="button" className="ml-2 cursor-pointer hover:text-primary font-bold transition-colors duration-150" aria-label={`Remove ${tech}`} onClick={() => handleRemoveTech(i)}>×</button>
                         </TechTag>
                       ))}
                       {techStack.length === 0 && <span className="font-mono text-[10px] text-muted italic">No tech added</span>}

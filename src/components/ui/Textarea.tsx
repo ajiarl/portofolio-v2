@@ -17,7 +17,7 @@ export function Textarea({ label, className, id, ...props }: TextareaProps) {
       <textarea
         id={textareaId}
         className={cn(
-          "bg-transparent border border-outline px-4 py-2 font-mono text-[16px] text-primary outline-none focus:border-accent focus:ring-0 resize-none transition-all duration-200 ease-in-out",
+          "bg-transparent border border-outline px-4 py-2 font-mono text-[16px] text-primary outline-none focus:border-accent focus:ring-0 focus-visible:ring-2 focus-visible:ring-accent/50 resize-none transition-all duration-200 ease-in-out",
           className
         )}
         {...props}

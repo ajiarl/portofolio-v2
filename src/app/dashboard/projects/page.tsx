@@ -21,7 +21,7 @@ export default async function DashboardProjectsPage() {
       {/* Header */}
       <section className="flex flex-col gap-6">
         <nav className="font-mono text-[10px] font-medium text-muted uppercase tracking-widest flex items-center gap-2">
-          <Link href="/dashboard" className="hover:text-primary transition-none">DASHBOARD</Link>
+          <Link href="/dashboard" className="hover:text-primary transition-all duration-200 ease-in-out">DASHBOARD</Link>
           <span>/</span>
           <span className="text-primary">PROJECTS</span>
         </nav>
@@ -59,7 +59,7 @@ export default async function DashboardProjectsPage() {
               </thead>
               <tbody>
                 {projects.map((project: any) => (
-                  <tr key={project.id} className="border-b border-border hover:bg-surface transition-none last:border-0">
+                  <tr key={project.id} className="border-b border-border hover:bg-surface transition-all duration-200 ease-in-out last:border-0">
                     <td className="p-4 font-bold text-primary border-r border-border">
                       {project.Title}
                     </td>

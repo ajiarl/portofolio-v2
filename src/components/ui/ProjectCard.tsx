@@ -6,12 +6,16 @@ import { TechTag } from './TechTag'
 import { toSlug } from '@/lib/utils'
 import { motion, useReducedMotion } from 'framer-motion'
 
+import { FiGithub, FiExternalLink } from 'react-icons/fi'
+
 export interface ProjectData {
   id: string;
   Title: string;
   Description: string;
   Img: string;
   TechStack: string[];
+  Github?: string;
+  Link?: string;
 }
 
 interface ProjectCardProps {
@@ -57,10 +61,44 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         <p className="font-mono text-sm text-muted flex-grow leading-relaxed">
           {project.Description}
         </p>
-        <footer className="flex flex-wrap gap-2 mt-4 pt-2 border-t border-border">
-          {project.TechStack && project.TechStack.map((tech, i) => (
-            <TechTag key={i}>{tech}</TechTag>
-          ))}
+        
+        {/* Footer Area with Tags and Links */}
+        <footer className="mt-4 pt-2 border-t border-border flex flex-col gap-4">
+          <div className="flex flex-wrap gap-2">
+            {project.TechStack && project.TechStack.map((tech, i) => (
+              <TechTag key={i}>{tech}</TechTag>
+            ))}
+          </div>
+          
+          {/* External Links */}
+          {(project.Github || project.Link) && (
+            <div className="flex items-center gap-4 mt-auto">
+              {project.Github && (
+                <a 
+                  href={project.Github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="text-outline hover:text-primary transition-colors duration-200"
+                  aria-label="GitHub Repository"
+                >
+                  <FiGithub className="w-[18px] h-[18px] stroke-[1.5]" />
+                </a>
+              )}
+              {project.Link && (
+                <a 
+                  href={project.Link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="text-outline hover:text-primary transition-colors duration-200"
+                  aria-label="Live Project"
+                >
+                  <FiExternalLink className="w-[18px] h-[18px] stroke-[1.5]" />
+                </a>
+              )}
+            </div>
+          )}
         </footer>
       </div>
     </Link>

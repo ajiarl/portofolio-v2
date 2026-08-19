@@ -45,7 +45,7 @@ export default async function WorkPage() {
   const supabase = await createClient()
   const { data: projects, error } = await supabase
     .from('projects')
-    .select('id, Title, Description, Img, TechStack')
+    .select('id, Title, Description, Img, TechStack, Github, Link')
     .order('created_at', { ascending: false })
 
   if (error) {

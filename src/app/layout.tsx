@@ -45,6 +45,9 @@ export const metadata: Metadata = {
     description: "Building robust, systematic solutions from the ground up, with a focus on Information Systems and technical precision.",
     images: ["/screenshot.png"],
   },
+  verification: {
+    google: "1unL3YsiRPyUZi-_4wOtKmDUNJq57hp7-uktQ4wlFnw",
+  },
 };
 
 export default function RootLayout({

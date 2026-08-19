@@ -54,7 +54,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${bricolage.variable} ${jetbrainsMono.variable} antialiased min-h-screen flex flex-col`}>
+      <body className={`${bricolage.variable} ${jetbrainsMono.variable} antialiased min-h-[100dvh] flex flex-col`}>
         <GridBackground />
         <Navbar />
         {children}

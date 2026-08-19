@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/Button"
 import Link from "next/link"
 import { TechTag } from "@/components/ui/TechTag"
 import type { Metadata } from "next"
+import { FiGithub, FiLinkedin, FiInstagram } from "react-icons/fi"
 
 export const metadata: Metadata = {
   title: "Aji Arlando | Fullstack Developer",
@@ -29,6 +30,21 @@ export default function Home() {
           <Link href="/contact">
             <Button variant="ghost" className="border border-border">CONTACT</Button>
           </Link>
+        </div>
+
+        <div className="mt-12 flex items-center gap-6">
+           <span className="font-mono text-[10px] font-medium text-outline uppercase tracking-widest">SOCIALS</span>
+           <div className="flex gap-5">
+              <a href="https://github.com/ajiarl" target="_blank" rel="noopener noreferrer" className="text-outline hover:text-primary transition-colors duration-200" aria-label="GitHub">
+                <FiGithub className="w-5 h-5 stroke-[1.5]" />
+              </a>
+              <a href="https://linkedin.com/in/ajiarlando" target="_blank" rel="noopener noreferrer" className="text-outline hover:text-primary transition-colors duration-200" aria-label="LinkedIn">
+                <FiLinkedin className="w-5 h-5 stroke-[1.5]" />
+              </a>
+              <a href="https://instagram.com/ajiii.ar" target="_blank" rel="noopener noreferrer" className="text-outline hover:text-primary transition-colors duration-200" aria-label="Instagram">
+                <FiInstagram className="w-5 h-5 stroke-[1.5]" />
+              </a>
+           </div>
         </div>
       </div>
     </main>

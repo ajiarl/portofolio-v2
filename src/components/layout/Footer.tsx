@@ -8,7 +8,7 @@ export function Footer() {
           © {new Date().getFullYear()} AJI ARLANDO. ALL RIGHTS RESERVED.
         </div>
         <div className="hidden md:flex gap-6">
-          <Link href="https://github.com/ajiarlando" target="_blank" className="font-mono text-[12px] font-bold uppercase tracking-[0.05em] text-muted hover:text-primary transition-all duration-200 ease-in-out">
+          <Link href="https://github.com/ajiarl" target="_blank" className="font-mono text-[12px] font-bold uppercase tracking-[0.05em] text-muted hover:text-primary transition-all duration-200 ease-in-out">
             GITHUB
           </Link>
           <Link href="https://linkedin.com/in/ajiarlando" target="_blank" className="font-mono text-[12px] font-bold uppercase tracking-[0.05em] text-muted hover:text-primary transition-all duration-200 ease-in-out">

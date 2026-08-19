@@ -18,7 +18,7 @@ export default function Home() {
     jobTitle: "Fullstack Developer",
     url: "https://ajiarlando.my.id",
     sameAs: [
-      "https://github.com/ajiarlando",
+      "https://github.com/ajiarl",
       "https://linkedin.com/in/ajiarlando"
     ],
     description: "Aji Arlando is a Fullstack Developer building robust, systematic solutions from the ground up, with a focus on Information Systems and technical precision."

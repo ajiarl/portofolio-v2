@@ -80,7 +80,7 @@ export default function ContactPage() {
             className="flex flex-col gap-6"
           >
             {/* Formsubmit config */}
-            <input type="hidden" name="_next" value="http://localhost:3000/contact?success=true" />
+            <input type="hidden" name="_next" value={`${process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_URL ? \`https://\${process.env.VERCEL_URL}\` : 'http://localhost:3000')}/contact?success=true`} />
             <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_subject" value="New message from Portfolio" />
             

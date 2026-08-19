@@ -20,8 +20,31 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ajiarlando.my.id"),
   title: "Aji Arlando - Fullstack Developer",
   description: "Building robust, systematic solutions from the ground up, with a focus on Information Systems and technical precision.",
+  openGraph: {
+    title: "Aji Arlando - Fullstack Developer",
+    description: "Building robust, systematic solutions from the ground up, with a focus on Information Systems and technical precision.",
+    url: "https://ajiarlando.my.id",
+    siteName: "Aji Arlando",
+    images: [
+      {
+        url: "/screenshot.png",
+        width: 1440,
+        height: 900,
+        alt: "Aji Arlando Portfolio Banner",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Aji Arlando - Fullstack Developer",
+    description: "Building robust, systematic solutions from the ground up, with a focus on Information Systems and technical precision.",
+    images: ["/screenshot.png"],
+  },
 };
 
 export default function RootLayout({

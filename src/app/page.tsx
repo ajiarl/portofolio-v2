@@ -24,20 +24,14 @@ export default function Home() {
           <p className="font-mono text-base md:text-[16px] text-muted max-w-2xl leading-[1.6]">
             Building robust, systematic solutions from the ground up, with a focus on Information Systems and technical precision.
           </p>
-          <div className="flex flex-wrap gap-4 pt-4">
+          <div className="flex flex-wrap items-center gap-4 pt-4 w-full">
             <Link href="/work">
               <Button variant="outline" className="border-primary border-2 h-12">VIEW WORK</Button>
             </Link>
             <Link href="/contact">
               <Button variant="ghost" className="border-border border-2 h-12">CONTACT</Button>
             </Link>
-          </div>
-        </div>
-
-        {/* Socials Row */}
-        <div className="mt-12 flex items-center gap-6 w-full">
-           <span className="font-mono text-[10px] font-medium text-outline uppercase tracking-widest">SOCIALS</span>
-           <div className="flex gap-5">
+            <div className="flex items-center gap-5 ml-2 md:ml-4">
               <a href="https://github.com/ajiarl" target="_blank" rel="noopener noreferrer" className="text-outline hover:text-primary transition-colors duration-200" aria-label="GitHub">
                 <FiGithub className="w-5 h-5 stroke-[1.5]" />
               </a>
@@ -47,7 +41,8 @@ export default function Home() {
               <a href="https://instagram.com/ajiii.ar" target="_blank" rel="noopener noreferrer" className="text-outline hover:text-primary transition-colors duration-200" aria-label="Instagram">
                 <FiInstagram className="w-5 h-5 stroke-[1.5]" />
               </a>
-           </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>

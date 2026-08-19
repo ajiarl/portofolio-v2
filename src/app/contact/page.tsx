@@ -5,6 +5,9 @@ import { Textarea } from "@/components/ui/Textarea"
 import { Button } from "@/components/ui/Button"
 
 export default function ContactPage() {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000')
+  const nextUrl = `${siteUrl}/contact?success=true`
+
   return (
     <main className="flex-grow w-full max-w-7xl mx-auto px-6 md:px-10 py-12 md:py-16 flex flex-col gap-12 relative z-10">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
@@ -80,7 +83,7 @@ export default function ContactPage() {
             className="flex flex-col gap-6"
           >
             {/* Formsubmit config */}
-            <input type="hidden" name="_next" value={`${process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_URL ? \`https://\${process.env.VERCEL_URL}\` : 'http://localhost:3000')}/contact?success=true`} />
+            <input type="hidden" name="_next" value={nextUrl} />
             <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_subject" value="New message from Portfolio" />
             

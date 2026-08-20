@@ -10,42 +10,6 @@ export const metadata: Metadata = {
 
 export const revalidate = 0 // Opt out of caching for now
 
-// Dummy data fallback
-const DUMMY_PROJECTS: ProjectData[] = [
-  {
-    id: 9991,
-    slug: 'project-alpha',
-    Title: 'Project Alpha',
-    Description: 'A high-performance distributed ledger system optimized for concurrent processing.',
-    Img: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop',
-    TechStack: ['TypeScript', 'Go', 'PostgreSQL']
-  },
-  {
-    id: 9992,
-    slug: 'system-beta',
-    Title: 'System Beta',
-    Description: 'Real-time data visualization pipeline handling millions of events per second.',
-    Img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop',
-    TechStack: ['React', 'WebGL', 'Rust']
-  },
-  {
-    id: 9993,
-    slug: 'framework-gamma',
-    Title: 'Framework Gamma',
-    Description: 'An open-source UI component library enforcing strict structural design principles.',
-    Img: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop',
-    TechStack: ['Vue.js', 'CSS Grid']
-  },
-  {
-    id: 9994,
-    slug: 'api-delta',
-    Title: 'API Delta',
-    Description: 'A secure, scalable RESTful API powering a global logistics platform.',
-    Img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1000&auto=format&fit=crop',
-    TechStack: ['Node.js', 'GraphQL', 'Redis']
-  }
-]
-
 export default async function WorkPage() {
   const supabase = await createClient()
   const { data: projects, error } = await supabase
@@ -82,8 +46,7 @@ export default async function WorkPage() {
       Link: project.Link,
     }))
 
-  const displayProjects =
-    normalizedProjects.length > 0 ? normalizedProjects : DUMMY_PROJECTS
+  const displayProjects = normalizedProjects
 
   return (
     <main className="flex-grow w-full max-w-7xl mx-auto px-5 md:px-8 lg:px-10 py-12 md:py-16 flex flex-col gap-12 relative z-10">

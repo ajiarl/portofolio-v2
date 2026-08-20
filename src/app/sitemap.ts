@@ -1,6 +1,5 @@
 import { MetadataRoute } from 'next'
 import { createClient } from '@/lib/supabase/server'
-import { toSlug } from '@/lib/utils'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000')
@@ -15,10 +14,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const supabase = await createClient()
   const { data: projects } = await supabase
     .from('projects')
-    .select('Title, created_at')
+    .select('slug, created_at')
     
   const projectRoutes = (projects || []).map((project) => ({
-    url: `${siteUrl}/project/${toSlug(project.Title)}`,
+    url: `${siteUrl}/project/${project.slug}`,
     lastModified: new Date(project.created_at).toISOString(),
   }))
 

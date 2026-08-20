@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { cleanupProjectImage } from '@/lib/storage/project-images'
+import { toSlug } from '@/lib/utils'
 import { Input } from '@/components/ui/Input'
 import { Textarea } from '@/components/ui/Textarea'
 import { Button } from '@/components/ui/Button'
@@ -11,6 +12,7 @@ import { TechTag } from '@/components/ui/TechTag'
 
 export interface ProjectData {
   id?: string
+  slug: string
   Title: string
   Description: string
   TechStack: string[]
@@ -129,6 +131,14 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
       return
     }
 
+    const trimmedTitle = title.trim()
+    const slug = toSlug(trimmedTitle)
+
+    if (!slug) {
+      setError('Title must contain at least one letter or number.')
+      return
+    }
+
     if (mode === 'create' && !imageFile) {
       setError('Project Image is required.')
       return
@@ -165,8 +175,8 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
       }
 
       // 2. Prepare payload
-      const payload = {
-        Title: title.trim(),
+      const basePayload = {
+        Title: trimmedTitle,
         Description: description.trim(),
         TechStack: techStack,
         Features: features,
@@ -177,6 +187,7 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
 
       // 3. Insert or Update
       if (mode === 'create') {
+        const payload = { ...basePayload, slug }
         const { error: insertError } = await supabase.from('projects').insert(payload)
         if (insertError) {
           if (newImgUrl) {
@@ -185,7 +196,7 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
           throw new Error(`Insert failed: ${insertError.message}`)
         }
       } else {
-        const { error: updateError } = await supabase.from('projects').update(payload).eq('id', initialData?.id)
+        const { error: updateError } = await supabase.from('projects').update(basePayload).eq('id', initialData?.id)
         if (updateError) {
           if (newImgUrl) {
             await cleanupProjectImage(supabase, newImgUrl, 'update-failed')

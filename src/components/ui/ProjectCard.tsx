@@ -1,12 +1,12 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { TechTag } from './TechTag'
-import { toSlug } from '@/lib/utils'
 
 import { FiGithub, FiExternalLink } from 'react-icons/fi'
 
 export interface ProjectData {
   id: string;
+  slug: string;
   Title: string;
   Description: string;
   Img: string;
@@ -22,7 +22,7 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, index }: ProjectCardProps) {
   const formattedNumber = (index + 1).toString().padStart(2, '0')
-  const slug = toSlug(project.Title)
+  const slug = project.slug
 
   return (
     <div

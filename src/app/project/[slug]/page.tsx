@@ -1,5 +1,4 @@
 import { createClient } from '@/lib/supabase/server'
-import { toSlug } from '@/lib/utils'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -18,8 +17,11 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params;
   const supabase = await createClient()
-  const { data: projects } = await supabase.from('projects').select('Title, Description')
-  const project = projects?.find((p: any) => toSlug(p.Title) === resolvedParams.slug)
+  const { data: project } = await supabase
+    .from('projects')
+    .select('Title, Description')
+    .eq('slug', resolvedParams.slug)
+    .single()
 
   if (!project) return { title: 'Project Not Found | Aji Arlando' }
 
@@ -32,9 +34,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ProjectDetailPage({ params }: Props) {
   const resolvedParams = await params;
   const supabase = await createClient()
-  const { data: projects } = await supabase.from('projects').select('*')
-  
-  const project = projects?.find((p: any) => toSlug(p.Title) === resolvedParams.slug)
+  const { data: project } = await supabase
+    .from('projects')
+    .select('*')
+    .eq('slug', resolvedParams.slug)
+    .single()
 
   if (!project) {
     notFound()

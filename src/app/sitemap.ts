@@ -18,7 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     
   const projectRoutes = (projects || []).map((project) => ({
     url: `${siteUrl}/project/${project.slug}`,
-    lastModified: new Date(project.created_at).toISOString(),
+    lastModified: project.created_at ? new Date(project.created_at).toISOString() : new Date().toISOString(),
   }))
 
   return [...routes, ...projectRoutes]

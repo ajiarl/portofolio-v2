@@ -9,19 +9,7 @@ import { Input } from '@/components/ui/Input'
 import { Textarea } from '@/components/ui/Textarea'
 import { Button } from '@/components/ui/Button'
 import { TechTag } from '@/components/ui/TechTag'
-
-export interface ProjectData {
-  id?: string
-  slug: string
-  Title: string
-  Description: string
-  TechStack: string[]
-  Features: string[]
-  Link?: string | null
-  Github?: string | null
-  Img: string
-  [key: string]: any
-}
+import type { ProjectData } from '@/lib/types/project'
 
 interface Props {
   isOpen: boolean
@@ -196,7 +184,7 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
           throw new Error(`Insert failed: ${insertError.message}`)
         }
       } else {
-        const { error: updateError } = await supabase.from('projects').update(basePayload).eq('id', initialData?.id)
+        const { error: updateError } = await supabase.from('projects').update(basePayload).eq('id', initialData!.id!)
         if (updateError) {
           if (newImgUrl) {
             await cleanupProjectImage(supabase, newImgUrl, 'update-failed')
@@ -212,8 +200,13 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
       // Success
       router.refresh()
       onClose()
-    } catch (err: any) {
-      setError(err.message || 'An unexpected error occurred.')
+    } catch (err: unknown) {
+      console.error('Submit Error:', err)
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'An unexpected error occurred.'
+      )
     } finally {
       setLoading(false)
     }

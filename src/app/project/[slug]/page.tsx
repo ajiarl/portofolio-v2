@@ -66,13 +66,13 @@ export default async function ProjectDetailPage({ params }: Props) {
             {project.Description}
           </div>
 
-          {project.Features && project.Features.length > 0 && (
+          {(project.Features as string[]) && (project.Features as string[]).length > 0 && (
             <div className="flex flex-col gap-3">
               <h2 className="font-mono text-[12px] font-bold uppercase tracking-[0.05em] text-primary">
                 KEY FEATURES
               </h2>
               <ol className="flex flex-col">
-                {project.Features.map((feature: string, index: number) => (
+                {(project.Features as string[]).map((feature: string, index: number) => (
                   <li key={index} className="py-2 border-b border-border font-mono text-sm text-primary flex gap-4">
                     <span className="text-outline">{(index + 1).toString().padStart(2, '0')}</span>
                     <span>{feature}</span>
@@ -87,7 +87,7 @@ export default async function ProjectDetailPage({ params }: Props) {
               TECH STACK
             </h2>
             <div className="flex flex-wrap gap-2">
-              {project.TechStack && project.TechStack.map((tech: string, i: number) => (
+              {(project.TechStack as string[]) && (project.TechStack as string[]).map((tech: string, i: number) => (
                 <TechTag key={i}>{tech}</TechTag>
               ))}
             </div>
@@ -120,8 +120,8 @@ export default async function ProjectDetailPage({ params }: Props) {
             <div className="aspect-[4/3] relative overflow-hidden bg-[#ebe7e6] group">
               {project.Img ? (
                 <Image 
-                  src={project.Img}
-                  alt={project.Title}
+                  src={project.Img!}
+                  alt={project.Title || 'Project Image'}
                   fill
                   className="object-cover filter grayscale group-hover:grayscale-0 transition-none duration-0"
                   sizes="(max-width: 1024px) 100vw, 50vw"

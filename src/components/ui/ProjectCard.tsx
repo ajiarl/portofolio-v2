@@ -4,16 +4,7 @@ import { TechTag } from './TechTag'
 
 import { FiGithub, FiExternalLink } from 'react-icons/fi'
 
-export interface ProjectData {
-  id: string;
-  slug: string;
-  Title: string;
-  Description: string;
-  Img: string;
-  TechStack: string[];
-  Github?: string;
-  Link?: string;
-}
+import type { ProjectData } from '@/lib/types/project'
 
 interface ProjectCardProps {
   project: ProjectData;

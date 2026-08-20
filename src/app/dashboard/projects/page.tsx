@@ -7,6 +7,19 @@ import { DeleteProjectButton } from '@/components/dashboard/DeleteProjectButton'
 
 export const revalidate = 0
 
+type DashboardProject = {
+  id: number
+  slug: string
+  Title: string
+  Description: string
+  TechStack: string[]
+  Features: string[]
+  Link: string | null
+  Github: string | null
+  Img: string | null
+  created_at: string
+}
+
 export default async function DashboardProjectsPage() {
   const supabase = await createClient()
   
@@ -14,6 +27,41 @@ export default async function DashboardProjectsPage() {
     .from('projects')
     .select('*')
     .order('created_at', { ascending: false })
+
+  if (error) {
+    console.error('Supabase Fetch Error:', error)
+  }
+
+  const dashboardProjects: DashboardProject[] = (projects ?? [])
+    .filter(
+      (project): project is typeof project & {
+        Title: string
+        Description: string
+        TechStack: string[]
+        Features: string[]
+        Img: string | null
+        created_at: string
+      } =>
+        project.Title !== null &&
+        project.Description !== null &&
+        project.created_at !== null &&
+        Array.isArray(project.TechStack) &&
+        project.TechStack.every((item) => typeof item === 'string') &&
+        Array.isArray(project.Features) &&
+        project.Features.every((item) => typeof item === 'string')
+    )
+    .map((project) => ({
+      id: project.id,
+      slug: project.slug,
+      Title: project.Title,
+      Description: project.Description,
+      TechStack: project.TechStack,
+      Features: project.Features,
+      Link: project.Link,
+      Github: project.Github,
+      Img: project.Img,
+      created_at: project.created_at,
+    }))
 
   return (
     <main className="flex-grow w-full max-w-7xl mx-auto px-5 md:px-8 lg:px-10 py-12 md:py-16 flex flex-col gap-8 relative z-10">
@@ -41,7 +89,7 @@ export default async function DashboardProjectsPage() {
 
       {/* Table Section */}
       <section>
-        {!projects || projects.length === 0 ? (
+        {dashboardProjects.length === 0 ? (
           <div className="border border-border p-12 flex flex-col items-center justify-center gap-4 text-center">
             <p className="font-mono text-sm text-muted">Belum ada project</p>
             <ProjectFormButton mode="create" />
@@ -58,7 +106,7 @@ export default async function DashboardProjectsPage() {
                 </tr>
               </thead>
               <tbody>
-                {projects.map((project: any) => (
+                {dashboardProjects.map((project) => (
                   <tr key={project.id} className="border-b border-border hover:bg-surface transition-all duration-200 ease-in-out last:border-0">
                     <td className="p-4 font-bold text-primary border-r border-border">
                       {project.Title}

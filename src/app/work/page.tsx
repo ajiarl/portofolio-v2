@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
-import { ProjectCard, type ProjectData } from '@/components/ui/ProjectCard'
+import { ProjectCard } from '@/components/ui/ProjectCard'
+import type { ProjectData } from '@/lib/types/project'
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -12,7 +13,7 @@ export const revalidate = 0 // Opt out of caching for now
 // Dummy data fallback
 const DUMMY_PROJECTS: ProjectData[] = [
   {
-    id: 'dummy-1',
+    id: 9991,
     slug: 'project-alpha',
     Title: 'Project Alpha',
     Description: 'A high-performance distributed ledger system optimized for concurrent processing.',
@@ -20,7 +21,7 @@ const DUMMY_PROJECTS: ProjectData[] = [
     TechStack: ['TypeScript', 'Go', 'PostgreSQL']
   },
   {
-    id: 'dummy-2',
+    id: 9992,
     slug: 'system-beta',
     Title: 'System Beta',
     Description: 'Real-time data visualization pipeline handling millions of events per second.',
@@ -28,7 +29,7 @@ const DUMMY_PROJECTS: ProjectData[] = [
     TechStack: ['React', 'WebGL', 'Rust']
   },
   {
-    id: 'dummy-3',
+    id: 9993,
     slug: 'framework-gamma',
     Title: 'Framework Gamma',
     Description: 'An open-source UI component library enforcing strict structural design principles.',
@@ -36,7 +37,7 @@ const DUMMY_PROJECTS: ProjectData[] = [
     TechStack: ['Vue.js', 'CSS Grid']
   },
   {
-    id: 'dummy-4',
+    id: 9994,
     slug: 'api-delta',
     Title: 'API Delta',
     Description: 'A secure, scalable RESTful API powering a global logistics platform.',
@@ -57,7 +58,31 @@ export default async function WorkPage() {
   }
 
 
-  const displayProjects = projects && projects.length > 0 ? projects : DUMMY_PROJECTS;
+  const normalizedProjects: ProjectData[] = (projects ?? [])
+    .filter(
+      (project): project is typeof project & {
+        Title: string
+        Description: string
+        TechStack: string[]
+      } =>
+        project.Title !== null &&
+        project.Description !== null &&
+        Array.isArray(project.TechStack) &&
+        project.TechStack.every((item) => typeof item === 'string')
+    )
+    .map((project) => ({
+      id: project.id,
+      slug: project.slug,
+      Title: project.Title,
+      Description: project.Description,
+      Img: project.Img,
+      TechStack: project.TechStack,
+      Github: project.Github,
+      Link: project.Link,
+    }))
+
+  const displayProjects =
+    normalizedProjects.length > 0 ? normalizedProjects : DUMMY_PROJECTS
 
   return (
     <main className="flex-grow w-full max-w-7xl mx-auto px-5 md:px-8 lg:px-10 py-12 md:py-16 flex flex-col gap-12 relative z-10">

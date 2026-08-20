@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/Button'
 
 interface Props {
   project: {
-    id: string
+    id: number
     Title: string
     Img: string | null
   }
@@ -40,8 +40,13 @@ export function DeleteProjectButton({ project }: Props) {
 
       router.refresh()
       setIsOpen(false)
-    } catch (err: any) {
-      setError(err.message || 'An unexpected error occurred.')
+    } catch (err: unknown) {
+      console.error('Delete error:', err)
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'An unexpected error occurred.'
+      )
     } finally {
       setLoading(false)
     }

@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import { Button } from '@/components/ui/Button'
-import { ProjectFormModal, ProjectData } from './ProjectFormModal'
+import { ProjectFormModal } from './ProjectFormModal'
+import type { ProjectData } from '@/lib/types/project'
 
 interface Props {
   mode: 'create' | 'edit'

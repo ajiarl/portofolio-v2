@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { TechTag } from '@/components/ui/TechTag'
 import { ProjectFormButton } from '@/components/dashboard/ProjectFormButton'
 import { DeleteProjectButton } from '@/components/dashboard/DeleteProjectButton'
+import { ToggleProjectPublishButton } from '@/components/dashboard/ToggleProjectPublishButton'
 
 export const revalidate = 0
 
@@ -16,6 +17,7 @@ type DashboardProject = {
   Link: string | null
   Github: string | null
   Img: string | null
+  is_published: boolean
   created_at: string
 }
 
@@ -39,6 +41,7 @@ export default async function DashboardProjectsPage() {
         TechStack: string[]
         Features: string[]
         Img: string | null
+        is_published: boolean
         created_at: string
       } =>
         project.Title !== null &&
@@ -59,6 +62,7 @@ export default async function DashboardProjectsPage() {
       Link: project.Link,
       Github: project.Github,
       Img: project.Img,
+      is_published: project.is_published,
       created_at: project.created_at,
     }))
 
@@ -99,6 +103,7 @@ export default async function DashboardProjectsPage() {
               <thead className="border-b border-border text-primary text-[10px] tracking-widest uppercase bg-surface">
                 <tr>
                   <th className="p-4 font-bold border-r border-border">Title</th>
+                  <th className="p-4 font-bold border-r border-border">Status</th>
                   <th className="p-4 font-bold border-r border-border">Actions</th>
                   <th className="p-4 font-bold border-r border-border">Tech Stack</th>
                   <th className="p-4 font-bold">Created At</th>
@@ -110,9 +115,20 @@ export default async function DashboardProjectsPage() {
                     <td className="p-4 font-bold text-primary border-r border-border">
                       {project.Title}
                     </td>
+                    <td className="p-4 border-r border-border font-bold text-xs uppercase tracking-widest">
+                      {project.is_published ? (
+                        <span className="text-primary">PUBLISHED</span>
+                      ) : (
+                        <span className="text-muted">DRAFT</span>
+                      )}
+                    </td>
                     <td className="p-4 border-r border-border min-w-[150px]">
                       <div className="flex flex-wrap gap-2">
                         <ProjectFormButton mode="edit" initialData={project} />
+                        <ToggleProjectPublishButton
+                          projectId={project.id}
+                          isPublished={project.is_published}
+                        />
                         <DeleteProjectButton project={project} />
                       </div>
                     </td>

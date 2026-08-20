@@ -199,7 +199,7 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
 
       // 3. Insert or Update
       if (mode === 'create') {
-        const payload = { ...basePayload, slug }
+        const payload = { ...basePayload, slug, is_published: false }
         const { error: insertError } = await supabase.from('projects').insert(payload)
         if (insertError) {
           if (newImgUrl) {

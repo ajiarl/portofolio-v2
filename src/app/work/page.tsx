@@ -51,6 +51,7 @@ export default async function WorkPage() {
   const { data: projects, error } = await supabase
     .from('projects')
     .select('id, slug, Title, Description, Img, TechStack, Github, Link')
+    .eq('is_published', true)
     .order('created_at', { ascending: false })
 
   if (error) {

@@ -21,6 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     .from('projects')
     .select('Title, Description')
     .eq('slug', resolvedParams.slug)
+    .eq('is_published', true)
     .single()
 
   if (!project) return { title: 'Project Not Found | Aji Arlando' }
@@ -38,6 +39,7 @@ export default async function ProjectDetailPage({ params }: Props) {
     .from('projects')
     .select('*')
     .eq('slug', resolvedParams.slug)
+    .eq('is_published', true)
     .single()
 
   if (!project) {

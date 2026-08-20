@@ -15,7 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const { data: projects } = await supabase
     .from('projects')
     .select('slug, created_at')
-    
+    .eq('is_published', true)
   const projectRoutes = (projects || []).map((project) => ({
     url: `${siteUrl}/project/${project.slug}`,
     lastModified: project.created_at ? new Date(project.created_at).toISOString() : new Date().toISOString(),

@@ -1,10 +1,7 @@
-"use client";
-
 import Link from 'next/link'
 import Image from 'next/image'
 import { TechTag } from './TechTag'
 import { toSlug } from '@/lib/utils'
-import { motion, useReducedMotion } from 'framer-motion'
 
 import { FiGithub, FiExternalLink } from 'react-icons/fi'
 
@@ -26,14 +23,11 @@ interface ProjectCardProps {
 export function ProjectCard({ project, index }: ProjectCardProps) {
   const formattedNumber = (index + 1).toString().padStart(2, '0')
   const slug = toSlug(project.Title)
-  const shouldReduceMotion = useReducedMotion()
 
   return (
-    <motion.div
-      initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.2, delay: index * 0.05, ease: "easeOut" }}
-      className="h-full relative group border border-border bg-surface hover:border-primary transition-all duration-200 ease-in-out flex flex-col cursor-pointer"
+    <div
+      className="h-full relative group border border-border bg-surface hover:border-primary transition-all duration-200 ease-in-out flex flex-col cursor-pointer animate-fade-in-up"
+      style={{ animationDelay: `${index * 0.05}s` }}
     >
       <Link 
         href={`/project/${slug}`}
@@ -104,6 +98,6 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           )}
         </footer>
       </div>
-    </motion.div>
+    </div>
   )
 }

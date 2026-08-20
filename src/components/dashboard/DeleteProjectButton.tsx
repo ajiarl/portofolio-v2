@@ -3,12 +3,14 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
+import { cleanupProjectImage } from '@/lib/storage/project-images'
 import { Button } from '@/components/ui/Button'
 
 interface Props {
   project: {
     id: string
     Title: string
+    Img: string | null
   }
 }
 
@@ -30,6 +32,10 @@ export function DeleteProjectButton({ project }: Props) {
 
       if (deleteError) {
         throw new Error(`Delete failed: ${deleteError.message}`)
+      }
+
+      if (project.Img) {
+        await cleanupProjectImage(supabase, project.Img, 'project-deleted')
       }
 
       router.refresh()

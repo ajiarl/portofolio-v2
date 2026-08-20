@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
+import { cleanupProjectImage } from '@/lib/storage/project-images'
 import { Input } from '@/components/ui/Input'
 import { Textarea } from '@/components/ui/Textarea'
 import { Button } from '@/components/ui/Button'
@@ -136,13 +137,15 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
     setLoading(true)
 
     try {
+      const oldImgUrl = mode === 'edit' && initialData ? initialData.Img : null
+      let newImgUrl: string | null = null
       let finalImgUrl = mode === 'edit' && initialData ? initialData.Img : ''
 
       // 1. Upload Image (only if there's a new file selected)
       if (imageFile) {
         const fileName = generateSafeFileName(title, imageFile.name)
         
-        const { data: uploadData, error: uploadError } = await supabase.storage
+        const { error: uploadError } = await supabase.storage
           .from('project-images')
           .upload(fileName, imageFile, {
             cacheControl: '3600',
@@ -157,6 +160,7 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
           .from('project-images')
           .getPublicUrl(fileName)
 
+        newImgUrl = publicUrl
         finalImgUrl = publicUrl
       }
 
@@ -174,10 +178,24 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
       // 3. Insert or Update
       if (mode === 'create') {
         const { error: insertError } = await supabase.from('projects').insert(payload)
-        if (insertError) throw new Error(`Insert failed: ${insertError.message}`)
+        if (insertError) {
+          if (newImgUrl) {
+            await cleanupProjectImage(supabase, newImgUrl, 'create-insert-failed')
+          }
+          throw new Error(`Insert failed: ${insertError.message}`)
+        }
       } else {
         const { error: updateError } = await supabase.from('projects').update(payload).eq('id', initialData?.id)
-        if (updateError) throw new Error(`Update failed: ${updateError.message}`)
+        if (updateError) {
+          if (newImgUrl) {
+            await cleanupProjectImage(supabase, newImgUrl, 'update-failed')
+          }
+          throw new Error(`Update failed: ${updateError.message}`)
+        }
+
+        if (newImgUrl && oldImgUrl) {
+          await cleanupProjectImage(supabase, oldImgUrl, 'update-success-old-image')
+        }
       }
 
       // Success

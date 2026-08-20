@@ -200,11 +200,22 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
       // 3. Insert or Update
       if (mode === 'create') {
         const payload = { ...basePayload, slug, is_published: false }
-        const { error: insertError } = await supabase.from('projects').insert(payload)
+
+        const { error: insertError } = await supabase
+          .from('projects')
+          .insert(payload)
+
         if (insertError) {
           if (newImgUrl) {
             await cleanupProjectImage(supabase, newImgUrl, 'create-insert-failed')
           }
+
+          if (insertError.code === '23505') {
+            throw new Error(
+              'A project with this title already exists. Please use a different title.'
+            )
+          }
+
           throw new Error(`Insert failed: ${insertError.message}`)
         }
       } else {

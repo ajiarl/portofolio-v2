@@ -92,6 +92,13 @@ export default function ContactPage() {
             <input type="hidden" name="_next" value={nextUrl} />
             <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_subject" value="New message from Portfolio" />
+            <input
+              type="text"
+              name="_honey"
+              style={{ display: 'none' }}
+              tabIndex={-1}
+              autoComplete="off"
+            />
             
             <Input 
               label="NAME"

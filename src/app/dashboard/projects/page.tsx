@@ -1,6 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
-import { Button } from '@/components/ui/Button'
 import { TechTag } from '@/components/ui/TechTag'
 import { ProjectFormButton } from '@/components/dashboard/ProjectFormButton'
 import { DeleteProjectButton } from '@/components/dashboard/DeleteProjectButton'

@@ -1,12 +1,12 @@
 import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
-import Link from 'next/link'
 import Image from 'next/image'
 import { TechTag } from '@/components/ui/TechTag'
 import { Button } from '@/components/ui/Button'
 import { ExternalLink } from 'lucide-react'
 import { FiGithub } from 'react-icons/fi'
 import type { Metadata } from 'next'
+import { jsonToStringArray } from '@/lib/types/project'
 
 export const revalidate = 0
 
@@ -44,6 +44,9 @@ export default async function ProjectDetailPage({ params }: Props) {
     notFound()
   }
 
+  const features = jsonToStringArray(project.Features)
+  const techStack = jsonToStringArray(project.TechStack)
+
   return (
     <main className="flex-grow w-full max-w-7xl mx-auto px-5 md:px-8 lg:px-10 py-12 md:py-16 flex flex-col gap-12 relative z-10">
       
@@ -66,13 +69,13 @@ export default async function ProjectDetailPage({ params }: Props) {
             {project.Description}
           </div>
 
-          {(project.Features as string[]) && (project.Features as string[]).length > 0 && (
+          {features.length > 0 && (
             <div className="flex flex-col gap-3">
               <h2 className="font-mono text-[12px] font-bold uppercase tracking-[0.05em] text-primary">
                 KEY FEATURES
               </h2>
               <ol className="flex flex-col">
-                {(project.Features as string[]).map((feature: string, index: number) => (
+                {features.map((feature, index) => (
                   <li key={index} className="py-2 border-b border-border font-mono text-sm text-primary flex gap-4">
                     <span className="text-outline">{(index + 1).toString().padStart(2, '0')}</span>
                     <span>{feature}</span>
@@ -87,7 +90,7 @@ export default async function ProjectDetailPage({ params }: Props) {
               TECH STACK
             </h2>
             <div className="flex flex-wrap gap-2">
-              {(project.TechStack as string[]) && (project.TechStack as string[]).map((tech: string, i: number) => (
+              {techStack.map((tech, i) => (
                 <TechTag key={i}>{tech}</TechTag>
               ))}
             </div>

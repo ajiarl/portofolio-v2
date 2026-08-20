@@ -3,16 +3,12 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { Menu, X } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 export function Navbar() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
 
-  // Close menu on route change
-  useEffect(() => {
-    setIsOpen(false)
-  }, [pathname])
 
   const links = [
     { href: '/', label: 'Home' },
@@ -20,6 +16,10 @@ export function Navbar() {
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
   ]
+
+  const handleNavigate = () => {
+    setIsOpen(false)
+  }
 
   return (
     <nav className="w-full top-0 sticky bg-background border-b border-border z-50">
@@ -68,6 +68,7 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
+                onClick={handleNavigate}
                 className={cn(
                   "font-mono text-[14px] font-bold uppercase tracking-[0.05em] px-4 py-3 transition-all duration-200 ease-in-out border",
                   isActive 

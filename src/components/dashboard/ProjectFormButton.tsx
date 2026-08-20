@@ -24,6 +24,7 @@ export function ProjectFormButton({ mode, initialData }: Props) {
           EDIT
         </Button>
         <ProjectFormModal 
+          key={`${mode}-${initialData?.id ?? 'new'}-${isOpen ? 'open' : 'closed'}`}
           isOpen={isOpen} 
           onClose={() => setIsOpen(false)} 
           mode={mode} 
@@ -43,6 +44,7 @@ export function ProjectFormButton({ mode, initialData }: Props) {
         TAMBAH PROJECT
       </Button>
       <ProjectFormModal 
+        key={`${mode}-${isOpen ? 'open' : 'closed'}`}
         isOpen={isOpen} 
         onClose={() => setIsOpen(false)} 
         mode={mode} 

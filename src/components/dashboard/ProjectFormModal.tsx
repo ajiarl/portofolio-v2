@@ -1,7 +1,8 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import { createClient } from '@/lib/supabase/client'
 import { cleanupProjectImage } from '@/lib/storage/project-images'
 import { toSlug } from '@/lib/utils'
@@ -19,15 +20,36 @@ interface Props {
 }
 
 export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) {
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
-  const [techStack, setTechStack] = useState<string[]>([])
-  const [features, setFeatures] = useState<string[]>([])
-  const [link, setLink] = useState('')
-  const [github, setGithub] = useState('')
+  const [title, setTitle] = useState(
+    mode === 'edit' && initialData ? initialData.Title || '' : ''
+  )
+
+  const [description, setDescription] = useState(
+    mode === 'edit' && initialData ? initialData.Description || '' : ''
+  )
+
+  const [techStack, setTechStack] = useState<string[]>(
+    mode === 'edit' && initialData ? initialData.TechStack || [] : []
+  )
+
+  const [features, setFeatures] = useState<string[]>(
+    mode === 'edit' && initialData ? initialData.Features || [] : []
+  )
+
+  const [link, setLink] = useState(
+    mode === 'edit' && initialData ? initialData.Link || '' : ''
+  )
+
+  const [github, setGithub] = useState(
+    mode === 'edit' && initialData ? initialData.Github || '' : ''
+  )
+
   const [imageFile, setImageFile] = useState<File | null>(null)
-  const [imagePreview, setImagePreview] = useState<string | null>(null)
-  
+
+  const [imagePreview, setImagePreview] = useState<string | null>(
+    mode === 'edit' && initialData ? initialData.Img || null : null
+  )
+
   // Temporary inputs for arrays
   const [currentTech, setCurrentTech] = useState('')
   const [currentFeature, setCurrentFeature] = useState('')
@@ -39,34 +61,7 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
   const router = useRouter()
   const supabase = createClient()
 
-  // Reset/Initialize state when modal opens
-  useEffect(() => {
-    if (isOpen) {
-      if (mode === 'edit' && initialData) {
-        setTitle(initialData.Title || '')
-        setDescription(initialData.Description || '')
-        setTechStack(initialData.TechStack || [])
-        setFeatures(initialData.Features || [])
-        setLink(initialData.Link || '')
-        setGithub(initialData.Github || '')
-        setImageFile(null)
-        setImagePreview(initialData.Img || null)
-      } else {
-        setTitle('')
-        setDescription('')
-        setTechStack([])
-        setFeatures([])
-        setLink('')
-        setGithub('')
-        setImageFile(null)
-        setImagePreview(null)
-      }
-      setError(null)
-      setLoading(false)
-      setCurrentTech('')
-      setCurrentFeature('')
-    }
-  }, [isOpen, mode, initialData])
+
 
   if (!isOpen) return null
 
@@ -324,7 +319,13 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
                       tabIndex={0}
                     >
                       {imagePreview ? (
-                        <img src={imagePreview} alt="Preview" className="w-full h-full absolute inset-0 object-cover grayscale" />
+                        <Image
+                          src={imagePreview}
+                          alt="Preview"
+                          fill
+                          unoptimized
+                          className="object-cover grayscale"
+                        />
                       ) : (
                         <span className="font-mono text-xs text-muted">Click to select image file</span>
                       )}

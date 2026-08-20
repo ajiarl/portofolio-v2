@@ -94,14 +94,32 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
-    if (file) {
-      setImageFile(file)
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string)
-      }
-      reader.readAsDataURL(file)
+
+    if (!file) return
+
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp']
+    const maxSize = 5 * 1024 * 1024
+
+    if (!allowedTypes.includes(file.type)) {
+      setError('Image must be JPG, PNG, or WebP.')
+      e.target.value = ''
+      return
     }
+
+    if (file.size > maxSize) {
+      setError('Image size must not exceed 5 MB.')
+      e.target.value = ''
+      return
+    }
+
+    setError(null)
+    setImageFile(file)
+
+    const reader = new FileReader()
+    reader.onloadend = () => {
+      setImagePreview(reader.result as string)
+    }
+    reader.readAsDataURL(file)
   }
 
   const generateSafeFileName = (title: string, originalName: string) => {
@@ -141,6 +159,17 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
 
       // 1. Upload Image (only if there's a new file selected)
       if (imageFile) {
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/webp']
+        const maxSize = 5 * 1024 * 1024
+
+        if (!allowedTypes.includes(imageFile.type)) {
+          throw new Error('Image must be JPG, PNG, or WebP.')
+        }
+
+        if (imageFile.size > maxSize) {
+          throw new Error('Image size must not exceed 5 MB.')
+        }
+
         const fileName = generateSafeFileName(title, imageFile.name)
         
         const { error: uploadError } = await supabase.storage
@@ -235,7 +264,7 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
             <form onSubmit={handleSubmit} className="flex flex-col gap-8">
               
               {error && (
-                <div className="font-mono text-[10px] uppercase font-bold tracking-widest text-primary p-3 border border-primary bg-[#fdf8f8]">
+                <div className="font-mono text-sm uppercase font-bold tracking-widest text-white p-4 bg-error shadow-sm">
                   ERROR: {error}
                 </div>
               )}

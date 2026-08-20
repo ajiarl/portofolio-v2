@@ -32,6 +32,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
             src={project.Img} 
             alt={project.Title}
             fill
+            unoptimized
             className="object-cover group-hover:opacity-90 transition-all duration-200 ease-in-out"
           />
         ) : (

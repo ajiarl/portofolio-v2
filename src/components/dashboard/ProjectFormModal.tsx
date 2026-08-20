@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { createClient } from '@/lib/supabase/client'
@@ -58,10 +58,74 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
   const [error, setError] = useState<string | null>(null)
 
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const modalRef = useRef<HTMLDivElement>(null)
+  const previousActiveElementRef = useRef<HTMLElement | null>(null)
   const router = useRouter()
   const supabase = createClient()
 
 
+
+  useEffect(() => {
+    if (!isOpen) return
+
+    previousActiveElementRef.current =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null
+
+    const modal = modalRef.current
+
+    if (!modal) return
+
+    const focusableSelector = [
+      'button:not([disabled])',
+      'input:not([disabled])',
+      'textarea:not([disabled])',
+      'select:not([disabled])',
+      'a[href]',
+      '[tabindex]:not([tabindex="-1"])',
+    ].join(',')
+
+    const getFocusableElements = () =>
+      Array.from(modal.querySelectorAll<HTMLElement>(focusableSelector))
+
+    const firstFocusable = getFocusableElements()[0]
+    firstFocusable?.focus()
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        if (!loading) onClose()
+        return
+      }
+
+      if (event.key !== 'Tab') return
+
+      const focusableElements = getFocusableElements()
+
+      if (focusableElements.length === 0) {
+        event.preventDefault()
+        return
+      }
+
+      const first = focusableElements[0]
+      const last = focusableElements[focusableElements.length - 1]
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      previousActiveElementRef.current?.focus()
+    }
+  }, [isOpen, loading, onClose])
 
   if (!isOpen) return null
 
@@ -253,12 +317,24 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-background/90">
       <div className="flex min-h-full items-start md:items-center justify-center p-4 md:p-10">
-        <div className="bg-surface border border-border w-full max-w-4xl relative">
+        <div
+          ref={modalRef}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="project-modal-title"
+          className="bg-surface border border-border w-full max-w-4xl relative"
+        >
           <header className="border-b border-border p-6 flex justify-between items-center bg-surface sticky top-0 z-10">
-            <h2 className="font-heading text-2xl font-extrabold text-primary">{modalTitle}</h2>
-            <button 
+            <h2
+              id="project-modal-title"
+              className="font-heading text-2xl font-extrabold text-primary"
+            >
+              {modalTitle}
+            </h2>
+            <button
               type="button"
               onClick={onClose}
+              aria-label="Close dialog"
               className="font-mono text-2xl text-muted hover:text-primary leading-none"
               disabled={loading}
             >
@@ -270,7 +346,10 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
             <form onSubmit={handleSubmit} className="flex flex-col gap-8">
               
               {error && (
-                <div className="font-mono text-sm uppercase font-bold tracking-widest text-white p-4 bg-error shadow-sm">
+                <div
+                  role="alert"
+                  className="font-mono text-sm uppercase font-bold tracking-widest text-white p-4 bg-error shadow-sm"
+                >
                   ERROR: {error}
                 </div>
               )}
@@ -406,7 +485,14 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
                         {features.map((feature, i) => (
                           <li key={i} className="group">
                             <span className="text-primary">{feature}</span>
-                            <button type="button" className="ml-2 cursor-pointer text-muted hover:text-primary font-bold" onClick={() => handleRemoveFeature(i)}>×</button>
+                            <button
+                              type="button"
+                              className="ml-2 cursor-pointer text-muted hover:text-primary font-bold"
+                              aria-label={`Remove ${feature}`}
+                              onClick={() => handleRemoveFeature(i)}
+                            >
+                              ×
+                            </button>
                           </li>
                         ))}
                       </ol>

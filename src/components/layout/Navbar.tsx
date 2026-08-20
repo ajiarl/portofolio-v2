@@ -3,12 +3,21 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { Menu, X } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export function Navbar() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        setIsOpen(false)
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [isOpen])
 
   const links = [
     { href: '/', label: 'Home' },
@@ -51,9 +60,11 @@ export function Navbar() {
 
         {/* Mobile Nav Toggle */}
         <button 
-          className="md:hidden p-1 text-primary border border-transparent hover:border-border transition-all duration-200 ease-in-out focus:outline-none focus:border-border"
+          className="md:hidden p-1 text-primary border border-transparent hover:border-border transition-all duration-200 ease-in-out focus-visible:outline-none focus-visible:border-border"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle Menu"
+          aria-expanded={isOpen}
+          aria-controls="mobile-navigation"
         >
           {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -61,7 +72,10 @@ export function Navbar() {
 
       {/* Mobile Nav Dropdown */}
       {isOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full border-b border-border bg-background flex flex-col p-6 gap-3 z-50">
+        <div
+          id="mobile-navigation"
+          className="md:hidden absolute top-full left-0 w-full border-b border-border bg-background flex flex-col p-6 gap-3 z-50"
+        >
           {links.map((link) => {
             const isActive = pathname === link.href
             return (

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "A collection of robust, systematic solutions and web applications built with technical precision.",
 }
 
-export const revalidate = 0 // Opt out of caching for now
+export const revalidate = 0
 
 export default async function WorkPage() {
   const supabase = await createClient()

@@ -37,7 +37,17 @@ export default async function ProjectDetailPage({ params }: Props) {
   const supabase = await createClient()
   const { data: project } = await supabase
     .from('projects')
-    .select('*')
+    .select(`
+      id,
+      slug,
+      Title,
+      Description,
+      Features,
+      TechStack,
+      Link,
+      Github,
+      Img
+    `)
     .eq('slug', resolvedParams.slug)
     .eq('is_published', true)
     .single()

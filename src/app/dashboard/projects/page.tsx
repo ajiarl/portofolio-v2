@@ -26,7 +26,19 @@ export default async function DashboardProjectsPage() {
   
   const { data: projects, error } = await supabase
     .from('projects')
-    .select('*')
+    .select(`
+      id,
+      slug,
+      Title,
+      Description,
+      TechStack,
+      Features,
+      Link,
+      Github,
+      Img,
+      is_published,
+      created_at
+    `)
     .order('created_at', { ascending: false })
 
   if (error) {

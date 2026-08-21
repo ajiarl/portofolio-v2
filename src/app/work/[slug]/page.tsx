@@ -1,9 +1,9 @@
 import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
+import Link from 'next/link'
 import { TechTag } from '@/components/ui/TechTag'
-import { Button } from '@/components/ui/Button'
-import { ExternalLink } from 'lucide-react'
+import { ExternalLink, ArrowLeft } from 'lucide-react'
 import { FiGithub } from 'react-icons/fi'
 import type { Metadata } from 'next'
 import { jsonToStringArray } from '@/lib/types/project'
@@ -61,9 +61,16 @@ export default async function ProjectDetailPage({ params }: Props) {
 
   return (
     <main className="flex-grow w-full max-w-7xl mx-auto px-5 md:px-8 lg:px-10 py-12 md:py-16 flex flex-col gap-12 relative z-10">
-      
+
       {/* Header */}
       <section className="flex flex-col gap-6">
+        <Link
+          href="/work"
+          className="group inline-flex items-center gap-2 font-mono text-[11px] md:text-[12px] font-bold uppercase tracking-[0.05em] text-muted hover:text-primary transition-all duration-200 ease-in-out w-fit py-1 border-b border-transparent hover:border-primary"
+        >
+          <ArrowLeft className="w-3.5 h-3.5 transition-transform duration-200 ease-in-out group-hover:-translate-x-0.5" />
+          BACK TO WORK
+        </Link>
         <header className="border-b border-border pb-6 flex flex-col gap-4">
           <h1 className="font-heading text-4xl md:text-[64px] font-extrabold leading-[1.1] text-primary">
             {project.Title}
@@ -110,19 +117,25 @@ export default async function ProjectDetailPage({ params }: Props) {
 
           <div className="flex flex-wrap gap-4 pt-2">
             {project.Link && (
-              <a href={project.Link} target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" className="border-primary border-2 flex items-center gap-2 text-xs">
-                  <ExternalLink className="w-4 h-4 stroke-[2]" />
-                  LIVE DEMO
-                </Button>
+              <a
+                href={project.Link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-6 py-3 font-mono text-[12px] font-bold uppercase tracking-[0.05em] border transition-all duration-200 ease-in-out cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 disabled:opacity-50 disabled:cursor-not-allowed border-primary text-primary hover:bg-primary hover:text-white border-2 flex gap-2 text-xs"
+              >
+                <ExternalLink className="w-4 h-4 stroke-[2]" />
+                LIVE DEMO
               </a>
             )}
             {project.Github && (
-              <a href={project.Github} target="_blank" rel="noopener noreferrer">
-                <Button variant="ghost" className="border border-border flex items-center gap-2 text-xs">
-                  <FiGithub className="w-4 h-4 stroke-[2]" />
-                  SOURCE CODE
-                </Button>
+              <a
+                href={project.Github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-6 py-3 font-mono text-[12px] font-bold uppercase tracking-[0.05em] transition-all duration-200 ease-in-out cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 disabled:opacity-50 disabled:cursor-not-allowed border-transparent text-muted hover:border-border hover:bg-surface border border-border flex gap-2 text-xs"
+              >
+                <FiGithub className="w-4 h-4 stroke-[2]" />
+                SOURCE CODE
               </a>
             )}
           </div>

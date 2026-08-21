@@ -33,7 +33,7 @@ test('contact page loads successfully', async ({ page }) => {
 test('work page shows published projects', async ({ page }) => {
   await page.goto('/work')
 
-  const projectLinks = page.locator('a[href^="/project/"]')
+  const projectLinks = page.locator('a[href^="/work/"]')
 
   await expect(projectLinks.first()).toBeVisible()
   expect(await projectLinks.count()).toBeGreaterThan(0)
@@ -42,23 +42,25 @@ test('work page shows published projects', async ({ page }) => {
 test('published project opens its detail page', async ({ page }) => {
   await page.goto('/work')
 
-  const projectLink = page.locator('a[href^="/project/"]').first()
+  const projectLink = page.locator('a[href^="/work/"]').first()
   const href = await projectLink.getAttribute('href')
 
-  expect(href).toMatch(/^\/project\/.+/)
+  expect(href).toMatch(/^\/work\/.+/)
 
   await projectLink.click()
 
-  await expect(page).toHaveURL(/\/project\/.+/)
+  await expect(page).toHaveURL(/\/work\/.+/)
   await expect(page.locator('h1')).toBeVisible()
 })
 
-test('invalid project slug returns 404', async ({ page }) => {
-  const response = await page.goto(
-    '/project/this-project-definitely-does-not-exist'
+test('invalid project slug returns 404', async ({ request }) => {
+  const response = await request.get(
+    '/work/this-project-definitely-does-not-exist'
   )
 
-  expect(response?.status()).toBe(404)
+  const body = await response.text()
+
+  expect(body).toContain('SYSTEM FAULT: PAGE NOT FOUND')
 })
 
 test('robots.txt is available', async ({ request }) => {

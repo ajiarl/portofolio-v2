@@ -3,16 +3,18 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { Menu, X } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 export function Navbar() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
+  const toggleRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isOpen) {
         setIsOpen(false)
+        toggleRef.current?.focus()
       }
     }
     document.addEventListener('keydown', handleKeyDown)
@@ -28,6 +30,7 @@ export function Navbar() {
 
   const handleNavigate = () => {
     setIsOpen(false)
+    toggleRef.current?.focus()
   }
 
   return (
@@ -60,7 +63,8 @@ export function Navbar() {
 
         {/* Mobile Nav Toggle */}
         <button 
-          className="md:hidden p-1 text-primary border border-transparent hover:border-border transition-all duration-200 ease-in-out focus-visible:outline-none focus-visible:border-border"
+          ref={toggleRef}
+          className="md:hidden p-1 text-primary border border-transparent hover:border-border transition-all duration-200 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle Menu"
           aria-expanded={isOpen}

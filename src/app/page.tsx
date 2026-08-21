@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/Button"
 import Link from "next/link"
 import { TechTag } from "@/components/ui/TechTag"
 import type { Metadata } from "next"
@@ -44,11 +43,17 @@ export default function Home() {
               Building robust, systematic solutions from the ground up, with a focus on Information Systems and technical precision.
             </p>
             <div className="flex flex-wrap items-center gap-4 pt-4 w-full">
-              <Link href="/work">
-                <Button variant="outline" className="border-primary border-2 h-12">VIEW WORK</Button>
+              <Link
+                href="/work"
+                className="inline-flex items-center justify-center px-6 py-3 font-mono text-[12px] font-bold uppercase tracking-[0.05em] border transition-all duration-200 ease-in-out cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 disabled:opacity-50 disabled:cursor-not-allowed border-primary text-primary hover:bg-primary hover:text-white border-2 h-12"
+              >
+                VIEW WORK
               </Link>
-              <Link href="/contact">
-                <Button variant="ghost" className="border-border border-2 h-12">CONTACT</Button>
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center px-6 py-3 font-mono text-[12px] font-bold uppercase tracking-[0.05em] border transition-all duration-200 ease-in-out cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 disabled:opacity-50 disabled:cursor-not-allowed border-transparent text-muted hover:border-border hover:bg-surface border-border border-2 h-12"
+              >
+                CONTACT
               </Link>
               <div className="flex items-center gap-5 ml-2 md:ml-4">
                 <a href="https://github.com/ajiarl" target="_blank" rel="noopener noreferrer" className="text-outline hover:text-primary transition-colors duration-200" aria-label="GitHub">

@@ -12,10 +12,10 @@ export default function NotFound() {
       </p>
       <div className="pt-4">
         <Link
-          href="/"
+          href="/work"
           className="inline-flex items-center justify-center px-6 py-3 font-mono text-[12px] font-bold uppercase tracking-[0.05em] border transition-all duration-200 ease-in-out cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 disabled:opacity-50 disabled:cursor-not-allowed border-primary text-primary hover:bg-primary hover:text-white border-2"
         >
-          RETURN TO HOME
+          BACK TO WORK
         </Link>
       </div>
     </main>

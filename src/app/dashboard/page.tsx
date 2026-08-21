@@ -27,10 +27,11 @@ export default function DashboardPage() {
       </header>
 
       <div className="flex flex-wrap gap-4">
-        <Link href="/dashboard/projects">
-          <Button variant="outline" className="border-primary border-2 flex justify-center w-fit px-8">
-            KELOLA PROJECTS
-          </Button>
+        <Link
+          href="/dashboard/projects"
+          className="inline-flex items-center justify-center px-6 py-3 font-mono text-[12px] font-bold uppercase tracking-[0.05em] border transition-all duration-200 ease-in-out cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 disabled:opacity-50 disabled:cursor-not-allowed border-primary text-primary hover:bg-primary hover:text-white border-2 flex w-fit px-8"
+        >
+          KELOLA PROJECTS
         </Link>
         <Button 
           variant="outline" 

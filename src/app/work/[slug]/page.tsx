@@ -156,7 +156,6 @@ export default async function ProjectDetailPage({ params }: Props) {
                   src={project.Img!}
                   alt={project.Title || 'Project Image'}
                   fill
-                  unoptimized
                   className="object-cover filter grayscale group-hover:grayscale-0 transition-none duration-0"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   priority

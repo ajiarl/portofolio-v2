@@ -44,3 +44,7 @@ next-env.d.ts
 /supabase/.temp/
 /playwright-report/
 /test-results/
+
+# Local design and AI tooling
+.impeccable/
+design_aji_arlando_engineering_portfolio/

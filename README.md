@@ -1,6 +1,6 @@
 # Aji Arlando — Fullstack Developer Portfolio 🚀
 
-A modern, systematic web portfolio built from the ground up, highlighting technical precision and robust architecture.
+A modern, systematic web portfolio built from the ground up, highlighting technical precision, robust architecture, and high performance.
 
 🔗 **Live Demo:** [ajiarlando.my.id](https://ajiarlando.my.id)
 
@@ -16,19 +16,29 @@ This repository contains the source code for my personal portfolio. It is a comp
 
 ## 🛠️ Tech Stack
 
-- **Framework:** Next.js 16 (App Router)
+- **Framework:** Next.js 16.3.1 (App Router)
 - **Language:** TypeScript
-- **Styling:** Tailwind CSS v4
+- **Styling:** Tailwind CSS v4 (via `@tailwindcss/postcss`)
 - **Backend & Auth:** Supabase (PostgreSQL + Authentication + Storage)
-- **Deployment:** Vercel
+- **Image Optimization:** Next.js Image Optimization integrated with Supabase Storage remote patterns
+- **Testing:** Vitest (Unit) & Playwright (E2E)
+- **Deployment:** Vercel (with Analytics & Speed Insights)
 
-## ✨ Features
+## ✨ Features & Architecture
 
-- **Public Facing Pages:** Home, Selected Work, About, and Contact.
-- **Admin Dashboard:** A fully protected internal CMS for executing CRUD operations on portfolio projects.
+- **Public Facing Pages:** 
+  - `/` (Home)
+  - `/work` (Selected Work Grid)
+  - `/work/[slug]` (Dynamic Project Detail Page, gracefully migrated from legacy `/project/:slug`)
+  - `/about` (Profile & Tech Stack)
+  - `/contact` (Contact Information)
+- **Admin Dashboard:** A fully protected internal CMS (`/dashboard`) for executing CRUD operations on portfolio projects, including automated image WebP compression on upload.
 - **Auth Guard:** Supabase Authentication securing all `/dashboard` and `/login` routes.
-- **SEO & Performance:** Dynamic metadata injection, auto-generated `sitemap.xml` & `robots.txt`, and skeleton loading states.
-- **Monitoring:** Real-time tracking via Vercel Analytics and Speed Insights.
+- **SEO & Performance:** 
+  - Dynamic metadata injection (perfect 100 SEO scores)
+  - Next.js Image Optimization for LCP and responsive `sizes` delivery
+  - Auto-generated `sitemap.xml` & `robots.ts`
+- **Testing Coverage:** End-to-End flows tested via Playwright and unit-level coverage via Vitest.
 
 ## 📂 Project Structure
 
@@ -36,13 +46,12 @@ This repository contains the source code for my personal portfolio. It is a comp
 src/
 ├── app/                  # Next.js App Router (Public routes & protected /dashboard)
 ├── components/           
+│   ├── dashboard/        # CMS and Admin components (e.g. ProjectFormModal)
 │   ├── layout/           # Shared page wrappers (Navbar, Footer, Grid Background)
-│   └── ui/               # Reusable primitive components (Button, Input, TechTag)
-├── lib/                  
-│   ├── supabase/         # Supabase SSR and Client initializers
-│   ├── constants.ts      # Global site configuration & static data
-│   └── utils.ts          # Helper utilities (class merging, slugification)
-└── ...
+│   └── ui/               # Reusable primitive components (ProjectCard, TechTag)
+├── lib/                  # Supabase SSR clients, constants, utilities, types
+tests/
+└── e2e/                  # Playwright E2E test suites (e.g. public.spec.ts)
 ```
 
 ## 🚀 Running Locally
@@ -61,14 +70,23 @@ To run this project on your local machine:
    ```
 
 3. **Set up Environment Variables:**
-   Create a `.env.local` file in the root directory and define the following variables. *(You will need to supply your own Supabase project credentials).*
+   Create a `.env.local` file in the root directory and define the following variables:
    ```env
-   NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-   NEXT_PUBLIC_SITE_URL=http://localhost:3000
+   NEXT_PUBLIC_SUPABASE_URL=
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=
+   NEXT_PUBLIC_SITE_URL=
    ```
 
-4. **Run the development server:**
+4. **Available Scripts:**
+   - `npm run dev`: Start the development server
+   - `npm run build`: Build for production
+   - `npm run start`: Start the production server
+   - `npm run lint`: Run ESLint checks
+   - `npm run test`: Run unit tests with Vitest
+   - `npm run test:watch`: Run unit tests in watch mode
+   - `npx playwright test`: Run End-to-End tests
+
+5. **Run the development server:**
    ```bash
    npm run dev
    ```

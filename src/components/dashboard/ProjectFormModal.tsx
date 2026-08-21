@@ -187,6 +187,65 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
     return `${Date.now()}_${safeTitle}.${ext}`
   }
 
+  const optimizeImage = (file: File): Promise<File> => {
+    return new Promise((resolve, reject) => {
+      const image = new window.Image()
+      const objectUrl = URL.createObjectURL(file)
+
+      image.onload = () => {
+        URL.revokeObjectURL(objectUrl)
+
+        const maxDimension = 1600
+        const scale = Math.min(
+          1,
+          maxDimension / Math.max(image.naturalWidth, image.naturalHeight)
+        )
+
+        const width = Math.round(image.naturalWidth * scale)
+        const height = Math.round(image.naturalHeight * scale)
+
+        const canvas = document.createElement('canvas')
+        canvas.width = width
+        canvas.height = height
+
+        const context = canvas.getContext('2d')
+
+        if (!context) {
+          reject(new Error('Unable to process image.'))
+          return
+        }
+
+        context.drawImage(image, 0, 0, width, height)
+
+        canvas.toBlob(
+          (blob) => {
+            if (!blob) {
+              reject(new Error('Unable to compress image.'))
+              return
+            }
+
+            const baseName = file.name.replace(/\.[^/.]+$/, '')
+
+            resolve(
+              new File([blob], `${baseName}.webp`, {
+                type: 'image/webp',
+              })
+            )
+          },
+          'image/webp',
+          0.82
+        )
+      }
+
+      image.onerror = () => {
+        URL.revokeObjectURL(objectUrl)
+        reject(new Error('Unable to read image.'))
+      }
+
+      image.src = objectUrl
+    })
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError(null)
@@ -229,13 +288,16 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
           throw new Error('Image size must not exceed 5 MB.')
         }
 
-        const fileName = generateSafeFileName(title, imageFile.name)
+        const optimizedImage = await optimizeImage(imageFile)
+
+        const fileName = generateSafeFileName(title, optimizedImage.name)
         
         const { error: uploadError } = await supabase.storage
           .from('project-images')
-          .upload(fileName, imageFile, {
+          .upload(fileName, optimizedImage, {
             cacheControl: '3600',
-            upsert: false
+            upsert: false,
+            contentType: 'image/webp',
           })
 
         if (uploadError) {
@@ -335,7 +397,7 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
               type="button"
               onClick={onClose}
               aria-label="Close dialog"
-              className="font-mono text-2xl text-muted hover:text-primary leading-none"
+              className="font-mono text-2xl text-muted hover:text-primary leading-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
               disabled={loading}
             >
               ×
@@ -453,7 +515,7 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
                     <div className="flex flex-wrap gap-2">
                       {techStack.map((tech, i) => (
                         <TechTag key={i}>
-                          {tech} <button type="button" className="ml-2 cursor-pointer hover:text-primary font-bold transition-colors duration-150" aria-label={`Remove ${tech}`} onClick={() => handleRemoveTech(i)}>×</button>
+                          {tech} <button type="button" className="ml-2 cursor-pointer hover:text-primary font-bold transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50" aria-label={`Remove ${tech}`} onClick={() => handleRemoveTech(i)}>×</button>
                         </TechTag>
                       ))}
                       {techStack.length === 0 && <span className="font-mono text-[10px] text-muted italic">No tech added</span>}
@@ -487,7 +549,7 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
                             <span className="text-primary">{feature}</span>
                             <button
                               type="button"
-                              className="ml-2 cursor-pointer text-muted hover:text-primary font-bold"
+                              className="ml-2 cursor-pointer text-muted hover:text-primary font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
                               aria-label={`Remove ${feature}`}
                               onClick={() => handleRemoveFeature(i)}
                             >
@@ -507,7 +569,7 @@ export function ProjectFormModal({ isOpen, onClose, mode, initialData }: Props) 
                 <Button type="button" variant="ghost" className="border border-border min-w-[120px]" onClick={onClose} disabled={loading}>
                   BATAL
                 </Button>
-                <Button type="submit" variant="outline" className="border-primary border-2 min-w-[200px]" disabled={loading}>
+                <Button type="submit" variant="outline" className="border-2 min-w-[200px]" disabled={loading}>
                   {submitText}
                 </Button>
               </footer>

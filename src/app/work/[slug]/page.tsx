@@ -96,7 +96,7 @@ export default async function ProjectDetailPage({ params }: Props) {
               <ol className="flex flex-col">
                 {features.map((feature, index) => (
                   <li key={index} className="py-2 border-b border-border font-mono text-sm text-primary flex gap-4">
-                    <span className="text-outline">{(index + 1).toString().padStart(2, '0')}</span>
+                    <span className="text-[#5f6363]">{(index + 1).toString().padStart(2, '0')}</span>
                     <span>{feature}</span>
                   </li>
                 ))}

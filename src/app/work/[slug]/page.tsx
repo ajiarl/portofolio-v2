@@ -24,11 +24,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     .eq('is_published', true)
     .single()
 
-  if (!project) return { title: 'Project Not Found | Aji Arlando' }
+  if (!project) {
+    return { 
+      title: 'Project Not Found | Aji Arlando',
+      description: 'The requested project could not be found.',
+    }
+  }
 
   return {
     title: `${project.Title} | Aji Arlando`,
-    description: project.Description,
+    description: project.Description ? (project.Description.substring(0, 160) + (project.Description.length > 160 ? '...' : '')) : '',
   }
 }
 

@@ -43,7 +43,10 @@ export function Navbar() {
         {/* Desktop Nav */}
         <div className="hidden md:flex gap-6">
           {links.map((link) => {
-            const isActive = pathname === link.href
+            const isActive =
+              link.href === '/work'
+                ? pathname === '/work' || pathname.startsWith('/work/')
+                : pathname === link.href
             return (
               <Link
                 key={link.href}
@@ -81,7 +84,10 @@ export function Navbar() {
           className="md:hidden absolute top-full left-0 w-full border-b border-border bg-background flex flex-col p-6 gap-3 z-50"
         >
           {links.map((link) => {
-            const isActive = pathname === link.href
+            const isActive =
+              link.href === '/work'
+                ? pathname === '/work' || pathname.startsWith('/work/')
+                : pathname === link.href
             return (
               <Link
                 key={link.href}

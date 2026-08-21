@@ -32,7 +32,9 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
             src={project.Img} 
             alt={project.Title}
             fill
-            unoptimized
+            priority={index === 0}
+            fetchPriority={index === 0 ? 'high' : undefined}
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover group-hover:opacity-90 transition-all duration-200 ease-in-out"
           />
         ) : (
@@ -44,7 +46,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
       <div className="p-4 flex flex-col gap-2 flex-grow relative z-10 pointer-events-none">
         <header className="flex justify-between items-start border-b border-border pb-2 mb-2">
           <h2 className="font-heading text-xl font-bold text-primary">{project.Title}</h2>
-          <span className="font-mono text-[10px] font-medium text-outline">{formattedNumber}</span>
+          <span className="font-mono text-[10px] font-medium text-[#5f6363]">{formattedNumber}</span>
         </header>
         <p className="font-mono text-sm text-muted leading-relaxed line-clamp-3">
           {project.Description}
@@ -69,7 +71,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                   href={project.Github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-outline hover:text-primary transition-colors duration-200"
+                  className="flex min-w-6 min-h-6 items-center justify-center text-outline hover:text-primary transition-colors duration-200"
                   aria-label="GitHub Repository"
                 >
                   <FiGithub className="w-[18px] h-[18px] stroke-[1.5]" />
@@ -80,7 +82,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                   href={project.Link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-outline hover:text-primary transition-colors duration-200"
+                  className="flex min-w-6 min-h-6 items-center justify-center text-outline hover:text-primary transition-colors duration-200"
                   aria-label="Live Project"
                 >
                   <FiExternalLink className="w-[18px] h-[18px] stroke-[1.5]" />

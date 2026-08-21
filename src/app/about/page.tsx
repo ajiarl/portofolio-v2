@@ -32,6 +32,7 @@ export default function AboutPage() {
                 className="object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
                 sizes="(max-width: 768px) 100vw, 33vw"
                 priority
+                fetchPriority="high"
               />
             </div>
           </div>
@@ -62,7 +63,7 @@ export default function AboutPage() {
             <div className="flex flex-col gap-8">
               {Object.entries(TECH_STACK).map(([category, items]) => (
                 <div key={category} className="flex flex-col gap-4">
-                  <h3 className="font-mono text-[10px] font-medium text-outline uppercase tracking-widest">
+                  <h3 className="font-mono text-[10px] font-medium text-[#5f6363] uppercase tracking-widest">
                     {category}
                   </h3>
                   <div className="flex flex-wrap gap-2">

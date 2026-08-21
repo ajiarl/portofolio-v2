@@ -32,7 +32,7 @@ export default function ContactPage() {
           <div className="flex flex-col gap-8">
             {/* Email Section */}
             <div className="flex flex-col gap-2 border-l border-primary pl-6 py-1">
-              <span className="font-mono text-[10px] font-medium text-outline uppercase tracking-widest">
+              <span className="font-mono text-[10px] font-medium text-[#5f6363] uppercase tracking-widest">
                 EMAIL
               </span>
               <a 
@@ -46,7 +46,7 @@ export default function ContactPage() {
 
             {/* Socials Section */}
             <div className="flex flex-col gap-3 border-l border-primary pl-6 py-1">
-              <span className="font-mono text-[10px] font-medium text-outline uppercase tracking-widest">
+              <span className="font-mono text-[10px] font-medium text-[#5f6363] uppercase tracking-widest">
                 SOCIALS
               </span>
               <ul className="flex flex-col gap-2">
@@ -70,7 +70,7 @@ export default function ContactPage() {
 
             {/* Location Section */}
             <div className="flex flex-col gap-2 border-l border-primary pl-6 py-1">
-              <span className="font-mono text-[10px] font-medium text-outline uppercase tracking-widest">
+              <span className="font-mono text-[10px] font-medium text-[#5f6363] uppercase tracking-widest">
                 LOCATION
               </span>
               <p className="font-mono text-base text-primary leading-[1.6]">
@@ -122,7 +122,7 @@ export default function ContactPage() {
             />
 
             <div className="pt-4">
-              <Button type="submit" variant="outline" className="w-full text-center flex justify-center border-primary border-2 whitespace-nowrap">
+              <Button type="submit" variant="outline" className="w-full border-2 whitespace-nowrap">
                 SEND MESSAGE
               </Button>
             </div>

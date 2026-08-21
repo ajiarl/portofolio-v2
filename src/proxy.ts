@@ -19,6 +19,9 @@ export async function proxy(request: NextRequest) {
     "font-src 'self' data:",
     "connect-src 'self' https://igmimmizowsmheypyesr.supabase.co wss://igmimmizowsmheypyesr.supabase.co https://vitals.vercel-insights.com",
     "frame-ancestors 'none'",
+    "base-uri 'self'",
+    "object-src 'none'",
+    "form-action 'self' https://api.web3forms.com",
   ].join('; ')
 
   // 3. Build request headers with nonce BEFORE NextResponse.next() snapshot

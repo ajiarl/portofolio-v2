@@ -4,14 +4,24 @@ export const TECH_STACK = {
     "React",
     "Next.js",
     "Node.js",
-    "Go",
-    "PostgreSQL"
+    "PHP",
+    "Laravel",
+    "PostgreSQL",
+    "MySQL"
+  ],
+  "Backend & Database": [
+    "Supabase",
+    "Prisma",
+    "Drizzle ORM",
+    "Railway"
   ],
   "Tooling & Infrastructure": [
     "Git",
     "Docker",
-    "Cursor",
-    "v0",
     "Tailwind CSS"
+  ],
+  "AI Tools": [
+    "Cursor",
+    "v0"
   ]
 };

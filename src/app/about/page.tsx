@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { TECH_STACK } from "@/lib/constants"
 import { TechTag } from "@/components/ui/TechTag"
+import { createClient } from "@/lib/supabase/server"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -8,7 +9,17 @@ export const metadata: Metadata = {
   description: "A glimpse into the workflow, technical capabilities, and background of Aji Arlando, a systematic builder and fullstack developer.",
 }
 
-export default function AboutPage() {
+export const revalidate = 0
+
+export default async function AboutPage() {
+  const supabase = await createClient()
+  const { count } = await supabase
+    .from('projects')
+    .select('*', { count: 'exact', head: true })
+    .eq('is_published', true)
+
+  const projectCount = count ?? 6
+
   return (
     <main className="flex-grow w-full max-w-7xl mx-auto px-5 md:px-8 lg:px-10 py-12 md:py-16 flex flex-col gap-12 relative z-10">
       <section className="border-b border-border pb-6 flex flex-col gap-4">
@@ -47,10 +58,10 @@ export default function AboutPage() {
             </h2>
             <div className="font-mono text-base text-muted leading-[1.6] flex flex-col gap-4">
               <p>
-                Aji Arlando is an Information Systems student and indie fullstack developer based in Palembang, Indonesia. He builds full-stack web products by directing AI coding agents as an architect, maintaining full control over technical decisions and system integrity.
+                Aji Arlando is an Information Systems student and fullstack developer based in Palembang, Indonesia. He builds production-grade web applications independently - from database schema to deployment.
               </p>
               <p>
-                His approach blends the speed of modern automation with the precision of classic engineering principles.
+                In the last year: {projectCount} projects shipped solo, 2 live in production (snipid.my.id, simagang-production.up.railway.app). Stack: Laravel, Next.js, TypeScript, MySQL, PostgreSQL, Docker, Railway.
               </p>
             </div>
           </section>

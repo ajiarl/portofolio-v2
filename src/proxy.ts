@@ -10,10 +10,10 @@ export async function proxy(request: NextRequest) {
   // 1. Generate nonce at the very start, before anything else
   const nonce = Buffer.from(crypto.randomUUID()).toString('base64')
 
-  // 2. Build CSP string with nonce (single source of truth for all return paths)
+  // 2. Build CSP string (single source of truth for all return paths)
   const csp = [
     "default-src 'self'",
-    `script-src 'self' 'nonce-${nonce}' https://va.vercel-scripts.com`,
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com",
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: blob: https://igmimmizowsmheypyesr.supabase.co",
     "font-src 'self' data:",

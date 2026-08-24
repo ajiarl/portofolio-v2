@@ -61,7 +61,10 @@ export default async function AboutPage() {
                 Aji Arlando is an Information Systems student and fullstack developer based in Palembang, Indonesia. He builds production-grade web applications independently - from database schema to deployment.
               </p>
               <p>
-                In the last year: {projectCount} projects shipped solo, 2 live in production (snipid.my.id, simagang-production.up.railway.app). Stack: Laravel, Next.js, TypeScript, MySQL, PostgreSQL, Docker, Railway.
+                In the last year: {projectCount} projects shipped solo, 2 live in production (snipid.my.id, simagang-production.up.railway.app).
+              </p>
+              <p className="text-sm text-[#5f6363]">
+                Stack: Laravel, Next.js, TypeScript, MySQL, PostgreSQL, Docker, Railway.
               </p>
             </div>
           </section>

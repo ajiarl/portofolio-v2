@@ -50,9 +50,14 @@ export default async function Home() {
                 Aji Arlando
               </h1>
             </div>
-            <p className="font-mono text-base md:text-[16px] text-muted max-w-2xl leading-[1.6]">
-              Building production-grade web applications solo - from schema to deployment. {projectCount} projects live. Laravel · Next.js · TypeScript · Docker.
-            </p>
+            <div className="flex flex-col gap-2 max-w-2xl">
+              <p className="font-mono text-base md:text-[16px] text-muted leading-[1.6]">
+                Building production-grade web applications solo - from schema to deployment.
+              </p>
+              <p className="font-mono text-sm md:text-[15px] text-muted leading-[1.6]">
+                <span className="text-primary font-semibold">{projectCount} projects live.</span> Laravel · Next.js · TypeScript · Docker
+              </p>
+            </div>
             <div className="flex flex-wrap items-center gap-4 pt-4 w-full">
               <Link
                 href="/work"

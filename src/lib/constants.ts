@@ -18,10 +18,14 @@ export const TECH_STACK = {
   "Tooling & Infrastructure": [
     "Git",
     "Docker",
+    "Vercel",
+    "Postman",
     "Tailwind CSS"
   ],
   "AI Tools": [
     "Cursor",
-    "v0"
+    "v0",
+    "Claude",
+    "ChatGPT"
   ]
 };

@@ -1,4 +1,4 @@
-# Aji Arlando - Fullstack Developer Portfolio 🚀
+# Aji Arlando — Fullstack Developer Portfolio 🚀
 
 A modern, systematic web portfolio built from the ground up, highlighting technical precision, robust architecture, and high performance.
 

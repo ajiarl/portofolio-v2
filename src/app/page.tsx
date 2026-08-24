@@ -1,25 +1,14 @@
 import Link from "next/link"
 import { TechTag } from "@/components/ui/TechTag"
-import { createClient } from "@/lib/supabase/server"
 import type { Metadata } from "next"
 import { FiGithub, FiLinkedin, FiInstagram } from "react-icons/fi"
 
 export const metadata: Metadata = {
-  title: "Aji Arlando - Fullstack Developer | Information Systems",
-  description: "Aji Arlando is a Fullstack Developer building production-grade web applications solo - from schema to deployment.",
+  title: "Aji Arlando — Fullstack Developer | Information Systems",
+  description: "Aji Arlando is a Fullstack Developer building robust, systematic solutions from the ground up, with a focus on Information Systems and technical precision.",
 }
 
-export const revalidate = 0
-
-export default async function Home() {
-  const supabase = await createClient()
-  const { count } = await supabase
-    .from('projects')
-    .select('*', { count: 'exact', head: true })
-    .eq('is_published', true)
-
-  const projectCount = count ?? 6
-
+export default function Home() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -31,7 +20,7 @@ export default async function Home() {
       "https://github.com/ajiarl",
       "https://linkedin.com/in/ajiarlando"
     ],
-    description: "Aji Arlando is a Fullstack Developer building production-grade web applications solo - from schema to deployment."
+    description: "Aji Arlando is a Fullstack Developer building robust, systematic solutions from the ground up, with a focus on Information Systems and technical precision."
   }
 
   return (
@@ -50,14 +39,9 @@ export default async function Home() {
                 Aji Arlando
               </h1>
             </div>
-            <div className="flex flex-col gap-2 max-w-2xl">
-              <p className="font-mono text-base md:text-[16px] text-muted leading-[1.6]">
-                Building production-grade web applications solo - from schema to deployment.
-              </p>
-              <p className="font-mono text-sm md:text-[15px] text-muted leading-[1.6]">
-                <span className="text-primary font-semibold">{projectCount} projects live.</span> Laravel · Next.js · TypeScript · Docker
-              </p>
-            </div>
+            <p className="font-mono text-base md:text-[16px] text-muted max-w-2xl leading-[1.6]">
+              Building robust, systematic solutions from the ground up, with a focus on Information Systems and technical precision.
+            </p>
             <div className="flex flex-wrap items-center gap-4 pt-4 w-full">
               <Link
                 href="/work"

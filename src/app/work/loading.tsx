@@ -7,7 +7,7 @@ export default function Loading() {
             Selected Work
           </h1>
           <p className="font-mono text-base text-muted mt-4 max-w-2xl leading-[1.6]">
-            A collection of building robust, systematic solutions with technical precision.
+            A collection of robust, systematic solutions with technical precision.
           </p>
         </div>
       </section>

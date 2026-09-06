@@ -23,6 +23,9 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://ajiarlando.my.id"),
   title: "Aji Arlando - Fullstack Developer",
   description: "Full-stack developer building production web applications independently. Laravel · Next.js · TypeScript · Docker.",
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     title: "Aji Arlando - Fullstack Developer",
     description: "Full-stack developer building production web applications independently. Laravel · Next.js · TypeScript · Docker.",

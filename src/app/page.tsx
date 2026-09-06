@@ -20,6 +20,14 @@ export default async function Home() {
 
   const projectCount = count ?? 6
 
+  // Fetch featured projects for internal linking
+  const { data: featuredProjects } = await supabase
+    .from('projects')
+    .select('slug, Title, Description')
+    .eq('is_published', true)
+    .order('created_at', { ascending: false })
+    .limit(3)
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -79,6 +87,42 @@ export default async function Home() {
               </div>
             </div>
           </div>
+
+          {/* Featured Projects Section */}
+          {featuredProjects && featuredProjects.length > 0 && (
+            <div className="flex flex-col gap-6 mt-16 w-full">
+              <div className="flex items-center justify-between border-b border-border pb-4">
+                <h2 className="font-mono text-[12px] font-bold uppercase tracking-[0.05em] text-primary">
+                  FEATURED PROJECTS
+                </h2>
+                <Link
+                  href="/work"
+                  className="font-mono text-[10px] font-medium uppercase tracking-widest text-muted hover:text-primary transition-colors duration-200"
+                >
+                  VIEW ALL →
+                </Link>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {featuredProjects.map((project) => (
+                  <Link
+                    key={project.slug}
+                    href={`/work/${project.slug}`}
+                    className="group border border-border bg-surface hover:border-primary p-4 transition-all duration-200 flex flex-col gap-3"
+                  >
+                    <h3 className="font-heading text-lg font-bold text-primary group-hover:text-outline transition-colors duration-200">
+                      {project.Title}
+                    </h3>
+                    <p className="font-mono text-xs text-muted leading-relaxed line-clamp-2">
+                      {project.Description}
+                    </p>
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-accent mt-auto">
+                      VIEW PROJECT →
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </main>
     </>

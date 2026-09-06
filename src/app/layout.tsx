@@ -33,9 +33,9 @@ export const metadata: Metadata = {
     siteName: "Aji Arlando",
     images: [
       {
-        url: "/screenshot.png",
-        width: 1440,
-        height: 900,
+        url: "/og-image.webp",
+        width: 1200,
+        height: 630,
         alt: "Aji Arlando Portfolio Banner",
       },
     ],
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Aji Arlando - Fullstack Developer",
     description: "Full-stack developer building production web applications independently. Laravel · Next.js · TypeScript · Docker.",
-    images: ["/screenshot.png"],
+    images: ["/og-image.webp"],
   },
   verification: {
     google: "1unL3YsiRPyUZi-_4wOtKmDUNJq57hp7-uktQ4wlFnw",

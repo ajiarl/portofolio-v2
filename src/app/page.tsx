@@ -6,7 +6,7 @@ import { FiGithub, FiLinkedin, FiInstagram } from "react-icons/fi"
 
 export const metadata: Metadata = {
   title: "Aji Arlando - Fullstack Developer | Information Systems",
-  description: "Aji Arlando is a Fullstack Developer building production-grade web applications solo - from schema to deployment.",
+  description: "Full-stack developer building production web applications independently. Laravel · Next.js · TypeScript · Docker.",
 }
 
 export const revalidate = 0
@@ -31,7 +31,7 @@ export default async function Home() {
       "https://github.com/ajiarl",
       "https://linkedin.com/in/ajiarlando"
     ],
-    description: "Aji Arlando is a Fullstack Developer building production-grade web applications solo - from schema to deployment."
+    description: "Full-stack developer building production web applications independently. Laravel · Next.js · TypeScript · Docker."
   }
 
   return (
@@ -51,7 +51,7 @@ export default async function Home() {
               </h1>
             </div>
             <p className="font-mono text-base md:text-[16px] text-muted max-w-2xl leading-[1.6]">
-              Building production-grade web applications solo - from schema to deployment. {projectCount} projects live. Laravel · Next.js · TypeScript · Docker.
+              Full-stack developer building production web applications independently. {projectCount} projects shipped. Laravel · Next.js · TypeScript · Docker.
             </p>
             <div className="flex flex-wrap items-center gap-4 pt-4 w-full">
               <Link

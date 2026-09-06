@@ -22,10 +22,10 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://ajiarlando.my.id"),
   title: "Aji Arlando - Fullstack Developer",
-  description: "Building robust, systematic solutions from the ground up, with a focus on Information Systems and technical precision.",
+  description: "Full-stack developer building production web applications independently. Laravel · Next.js · TypeScript · Docker.",
   openGraph: {
     title: "Aji Arlando - Fullstack Developer",
-    description: "Building robust, systematic solutions from the ground up, with a focus on Information Systems and technical precision.",
+    description: "Full-stack developer building production web applications independently. Laravel · Next.js · TypeScript · Docker.",
     url: "https://ajiarlando.my.id",
     siteName: "Aji Arlando",
     images: [
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Aji Arlando - Fullstack Developer",
-    description: "Building robust, systematic solutions from the ground up, with a focus on Information Systems and technical precision.",
+    description: "Full-stack developer building production web applications independently. Laravel · Next.js · TypeScript · Docker.",
     images: ["/screenshot.png"],
   },
   verification: {

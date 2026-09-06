@@ -5,7 +5,7 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Selected Work | Aji Arlando",
-  description: "A collection of robust, systematic solutions and web applications built with technical precision.",
+  description: "Production web projects built with Laravel, Next.js, TypeScript, and Docker. From internship systems to URL shorteners.",
 }
 
 export const revalidate = 0

@@ -34,6 +34,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${project.Title} | Aji Arlando`,
     description: project.Description ? (project.Description.substring(0, 160) + (project.Description.length > 160 ? '...' : '')) : '',
+    alternates: {
+      canonical: `/work/${resolvedParams.slug}`,
+    },
   }
 }
 

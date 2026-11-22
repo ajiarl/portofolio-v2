@@ -21,7 +21,7 @@ export async function proxy(request: NextRequest) {
     "frame-ancestors 'none'",
     "base-uri 'self'",
     "object-src 'none'",
-    "form-action 'self' https://api.web3forms.com",
+    "form-action 'self' https://api.web3forms.com https://formsubmit.co",
   ].join('; ')
 
   // 3. Build request headers with nonce BEFORE NextResponse.next() snapshot
